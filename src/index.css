@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #1a1b26;
+    --bg-secondary: #24283b;
+    --text-primary: #c0caf5;
+    --text-secondary: #9aa5ce;
+    --accent: #7aa2f7;
+    --accent-hover: #89b4fa;
+    --surface: #16161e;
+    --hover: #2f334d;
+    --divider: #3b4261;
+  }
+
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-mono text-lg;
+  }
+}
+
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--divider);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+footer p a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+footer p strong {
+  color: #f7768e; /* TokyoNight Red */
+}
+
+footer p .white-text {
+  color: #bfcbde; /* White color for Systems and Research */
+  
+}
+
+footer p .blue-text {
+  color: #8eb2e5;
+  /* -webkit-text-stroke: 0.5px white; */
+  font-weight: bold;
+}
