@@ -11,7 +11,7 @@ function App() {
           <div className="flex items-center justify-center gap-3 mb-4">
             <Newspaper className="w-10 h-10 text-tn-accent" />
             <h1 className="text-4xl md:text-5xl font-bold text-tn-accent">
-              My Life, Learnings and My Thoughts
+              Tales of My Life, Learnings and Thoughts.
             </h1>
           </div>
           <p className="text-tn-text-secondary text-lg">
