@@ -4,6 +4,20 @@
 
 @layer base {
   :root {
+    /* Autumn Light Theme */
+    --bg-primary: #faf6f1;
+    --bg-secondary: #f3e9e0;
+    --text-primary: #4a3728;
+    --text-secondary: #795c48;
+    --accent: #d35f3c;
+    --accent-hover: #bf4f2f;
+    --surface: #ffffff;
+    --hover: #f8ede4;
+    --divider: #e6d5c7;
+  }
+
+  :root[data-theme="dark"] {
+    /* Tokyo Night Theme */
     --bg-primary: #1a1b26;
     --bg-secondary: #24283b;
     --text-primary: #c0caf5;
@@ -16,7 +30,7 @@
   }
 
   body {
-    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-mono text-lg;
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-mono text-lg transition-colors duration-300;
   }
 }
 
