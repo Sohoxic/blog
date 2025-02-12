@@ -12,41 +12,98 @@
 <body>
     <div class="container">
         <header>
-            <h1 class="site-title">Introducing <a href="https://github.com/Sohoxic/toxic" style="text-decoration: underline; text-underline-offset: 3px;">Toxic</a> by <a href="https://sarkarsoham.com" style="text-decoration: underline; text-underline-offset: 3px;">Sohoxic</a> </h1>
-            <h1>A Modern Dark Theme Static Site Generator</h1>
+            <h1 class="site-title">Introducing Toxic - A Modern Dark Theme Static Site Generator</h1>
         </header>
         <main class="content">
-            <blockquote>
-                <p><a href="https://github.com/Sohoxic/toxic">Link to the github repo for installation.</a></p>
-            </blockquote>
-<p>Welcome to Toxic, a sleek and powerful static site generator designed specifically for developers who prefer the elegance of dark themes. Built with Python, Toxic transforms your markdown content into beautifully styled websites with minimal effort.</p>
-<h2>Why Choose Toxic?</h2>
-<p>Toxic was born from the need for a lightweight, fast, and aesthetically pleasing static site generator that prioritizes dark theme design. Its architecture and thoughtful defaults make it perfect for developers who want to focus on content rather than configuration.</p>
-<h3>Technical Foundation</h3>
-<pre class="codehilite"><code class="language-python">def generate_site():
-    &quot;&quot;&quot;
-    Core function that powers Toxic's site generation
-    &quot;&quot;&quot;
-    process_markdown()
-    apply_dark_theme()
-    optimize_assets()
-    return &quot;Beautiful dark-themed site&quot;
-</code></pre>
-
-<h2>Key Features</h2>
-<p>Here's what makes Toxic special:</p>
+            <h1>Introducing <a href="https://github.com/Sohoxic/toxic">Toxic</a></h1>
+<h1>The Static Site Generator</h1>
+<p>Welcome to Toxic by <a href="https://github.com/Sohoxic/toxic">Sohoxic</a>, a simple and minimal static site generator which was primarily designed to help me easily document my life by keeping notes, learnings, thoughts all in one place instead of making static website for everything everytime, thus prioritising easy website building. This is the gardener of my digital garden(the initiator and the master to convert markdown files to static websites.).</p>
+<p>For my fellow develops who wants to transform their lives in the similar way which I did, here's toxic for you to document your life, learnings etc. </p>
+<blockquote>
+<p>Why Choose Toxic? 
+If your focus is more on content rather than configuration, then toxic is for you</p>
+</blockquote>
+<h2>The Philosophy Behind Toxic</h2>
+<p>Toxic was created with three core principles in mind:</p>
 <ul>
-<li><strong>Dark Theme First</strong>: Carefully crafted dark color scheme that reduces eye strain 😜</li>
-<li><strong>Lightning Fast</strong>: Built with Python for optimal performance (supports parallel processing of md files)</li>
-<li><strong>Smart Defaults</strong>: Pre-configured with Roboto Mono for excellent readability.</li>
-<li><strong>Responsive design</strong></li>
-<li><strong>Quick rebuild times</strong></li>
-<li><strong>Code syntax highlighting</strong></li>
-<li><strong>YAML frontmatter support</strong></li>
+<li><strong>Simplicity</strong>: No unnecessary complexity or bloat. You should be painlessly able to write <code>.md</code> files without having to worry about setting up and using your ssg.</li>
+<li><strong>Performance</strong>: Ease of use should be the priority with faster processing and build times. We have parallel processing in place to take care of this</li>
+<li><strong>Aesthetics</strong>: Tokyonight theme. I love this! If you don't you can always customise, toxic has given you all the flexibility</li>
 </ul>
 <blockquote>
-<p>The best static site generator is the one that stays out of your way while making your content shine. Toxic does exactly that, with style.</p>
+<p>Toxic does all of this, with style. Haha!</p>
 </blockquote>
+<p><a href="https://github.com/Sohoxic/toxic">Get started with Toxic Today!</a> </p>
+<h2>Prerequisites</h2>
+<ul>
+<li>Python 3.7 or higher</li>
+<li>pip (Python package installer)</li>
+</ul>
+<h2>Project Structure</h2>
+<pre class="codehilite"><code>your-site/
+├── toxic.py          # The static site generator script
+├── content/             # Your markdown files go here
+├── templates/           # HTML templates
+├── assets/             # Static assets (CSS, images, etc.)
+│   └── css/
+│       └── style.css
+└── dist/               # Generated site (output directory)
+</code></pre>
+
+<!-- ## Key Features
+
+Here's what makes Toxic special:
+
+* **Dark Theme First**: Carefully crafted dark color scheme that reduces eye strain 😜
+* **Lightning Fast**: Built with Python for optimal performance (supports parallel processing of md files)
+* **Smart Defaults**: Pre-configured with Roboto Mono for excellent readability.
+* **Responsive design**
+* **Quick rebuild times**
+* **Code syntax highlighting**
+* **YAML frontmatter support** -->
+
+<h2>Installation</h2>
+<ol>
+<li>Clone this repository or download the files:</li>
+</ol>
+<pre class="codehilite"><code class="language-bash">git clone https://github.com/Sohoxic/toxic.git
+cd toxic
+</code></pre>
+
+<ol>
+<li>Install required dependencies:</li>
+</ol>
+<pre class="codehilite"><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+
+<h2>Usage</h2>
+<h3>1. Create a New Post</h3>
+<p>Create a markdown file in the <code>content</code> directory with YAML frontmatter:</p>
+<pre class="codehilite"><code class="language-markdown">---
+title: My First Post
+template: default.html
+---
+
+# Welcome to My Blog
+
+This is my first blog post.
+</code></pre>
+
+<h3>2. Build the Site</h3>
+<p>Run the generator:</p>
+<pre class="codehilite"><code class="language-bash">python toxic.py
+</code></pre>
+
+<h3>3. View Your Site</h3>
+<p>Open <code>dist/your-post.html</code> in a web browser to see your generated page.</p>
+<h2>Customization Options</h2>
+<h3>Modifying the Theme</h3>
+<p>The dark theme CSS is located in <code>assets/css/style.css</code>. You can modify:
+* Color schemes
+* Typography
+* Layout structure</p>
+<h3>Template Customization</h3>
+<p>Modify <code>templates/default.html</code> to change the HTML structure.</p>
 <h2>Technical Details</h2>
 <p>Here's a breakdown of Toxic's key components:</p>
 <table>
@@ -85,44 +142,63 @@
 </tr>
 </tbody>
 </table>
-<h2>Getting Started</h2>
-<p>Setting up your first Toxic site is straightforward:</p>
+<h2>Deployment</h2>
+<h3>GitHub Pages</h3>
 <ol>
-<li>Install toxic from the github repo using instruction as given in the repository.</li>
-<li>Create your content in markdown</li>
-<li>Run the generator</li>
-<li>Deploy your beautiful dark-themed site</li>
+<li>Create a new repository on GitHub</li>
+<li>Push your code:</li>
 </ol>
-<h2>The Philosophy Behind Toxic</h2>
-<p>Toxic was created with three core principles in mind:</p>
-<ul>
-<li><strong>Simplicity</strong>: No unnecessary complexity or bloat</li>
-<li><strong>Performance</strong>: Fast build times and optimal output</li>
-<li><strong>Aesthetics</strong>: Beautiful dark theme that doesn't sacrifice readability</li>
-</ul>
-<p><a href="#">Get started with Toxic today</a> and experience the perfect blend of functionality and style.</p>
-<h2>Customization Options</h2>
-<p>While Toxic comes with sensible defaults, you can easily customize:</p>
-<ul>
-<li>Color schemes</li>
-<li>Typography</li>
-<li>Layout structure</li>
-<li>Build process</li>
-<li>Asset handling</li>
-</ul>
-<blockquote>
-<p>Toxic gives you the power to create without getting in your way. It's the static site generator that developers have been waiting for.</p>
-</blockquote>
-<p>Remember, Toxic is more than just a static site generator - it's a complete solution for developers who appreciate the elegance of dark themes and the power of simplicity.</p>
+<pre class="codehilite"><code class="language-bash">git init
+git add .
+git commit -m &quot;Initial commit&quot;
+git branch -M main
+git remote add origin &lt;your-github-repo-url&gt;
+git push -u origin main
+</code></pre>
+
+<ol>
+<li>Enable GitHub Pages in repository settings</li>
+<li>Set the source to the <code>dist</code> directory</li>
+</ol>
+<h3>Netlify</h3>
+<ol>
+<li>Create a <code>netlify.toml</code>:</li>
+</ol>
+<pre class="codehilite"><code class="language-toml">[build]
+  publish = &quot;dist&quot;
+  command = &quot;python generator.py&quot;
+</code></pre>
+
+<ol>
+<li>Connect your repository to Netlify</li>
+<li>Deploy!</li>
+</ol>
+<h3>Vercel</h3>
+<ol>
+<li>Create a <code>vercel.json</code>:</li>
+</ol>
+<pre class="codehilite"><code class="language-json">{
+  &quot;buildCommand&quot;: &quot;python toxic.py&quot;,
+  &quot;outputDirectory&quot;: &quot;dist&quot;
+}
+</code></pre>
+
+<ol>
+<li>Connect your repository to Vercel</li>
+<li>Deploy!</li>
+</ol>
         </main>
-        <footer>
+        <!-- <footer>
             <p>&copy; 2025 Soham Sarkar | 
                 <a href="https://sarkarsoham.com">sarkarsoham.com</a> | 
                 <strong>AI</strong> | 
                 <span class="blue-text">Systems</span> | 
                 <span class="white-text">Research</span>
             </p>
-        </footer>        
+        </footer>         -->
+        <footer>
+            <p>&copy; Built with ❤️ by toxic!</p>
+        </footer>
     </div>
 </body>
 </html>
