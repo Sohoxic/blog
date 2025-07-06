@@ -14,6 +14,14 @@
     --surface: #ffffff;
     --hover: #f8ede4;
     --divider: #e6d5c7;
+    --tn-bg-primary: #1a1b23;
+    --tn-bg-secondary: #16161e;
+    --tn-surface: #24283b;
+    --tn-hover: #414868;
+    --tn-divider: #292e42;
+    --tn-text-primary: #c0caf5;
+    --tn-text-secondary: #9aa5ce;
+    --tn-accent: #7aa2f7;
   }
 
   :root[data-theme="dark"] {
@@ -29,8 +37,25 @@
     --divider: #3b4261;
   }
 
+  [data-theme="light"] {
+    --tn-bg-primary: #f7f7f7;
+    --tn-bg-secondary: #ffffff;
+    --tn-surface: #ffffff;
+    --tn-hover: #f0f0f0;
+    --tn-divider: #e0e0e0;
+    --tn-text-primary: #24292e;
+    --tn-text-secondary: #586069;
+    --tn-accent: #0366d6;
+  }
+
+  * {
+    border-color: rgb(var(--tn-divider));
+  }
+
   body {
     @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-mono text-lg transition-colors duration-300;
+    background-color: rgb(var(--tn-bg-primary));
+    color: rgb(var(--tn-text-primary));
   }
 }
 
@@ -63,4 +88,37 @@ footer p .blue-text {
   color: #8eb2e5;
   /* -webkit-text-stroke: 0.5px white; */
   font-weight: bold;
+}
+
+@layer utilities {
+  .bg-tn-bg-primary { background-color: var(--tn-bg-primary); }
+  .bg-tn-bg-secondary { background-color: var(--tn-bg-secondary); }
+  .bg-tn-surface { background-color: var(--tn-surface); }
+  .bg-tn-hover { background-color: var(--tn-hover); }
+  .border-tn-divider { border-color: var(--tn-divider); }
+  .text-tn-text-primary { color: var(--tn-text-primary); }
+  .text-tn-text-secondary { color: var(--tn-text-secondary); }
+  .text-tn-accent { color: var(--tn-accent); }
+  .ring-tn-accent { --tw-ring-color: var(--tn-accent); }
+  
+  /* Search highlighting */
+  mark {
+    background-color: rgba(255, 235, 59, 0.3);
+    color: inherit;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+  }
+  
+  [data-theme="light"] mark {
+    background-color: rgba(255, 235, 59, 0.5);
+  }
+  
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
