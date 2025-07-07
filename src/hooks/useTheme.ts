@@ -1,16 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export function useTheme() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const theme = 'dark';
 
   useEffect(() => {
-    // Update the data-theme attribute on the root element
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+    // Always set data-theme attribute to dark
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
 
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-  return { theme, toggleTheme };
+  return { theme };
 }

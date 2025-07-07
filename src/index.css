@@ -4,28 +4,7 @@
 
 @layer base {
   :root {
-    /* Autumn Light Theme */
-    --bg-primary: #faf6f1;
-    --bg-secondary: #f3e9e0;
-    --text-primary: #4a3728;
-    --text-secondary: #795c48;
-    --accent: #d35f3c;
-    --accent-hover: #bf4f2f;
-    --surface: #ffffff;
-    --hover: #f8ede4;
-    --divider: #e6d5c7;
-    --tn-bg-primary: #1a1b23;
-    --tn-bg-secondary: #16161e;
-    --tn-surface: #24283b;
-    --tn-hover: #414868;
-    --tn-divider: #292e42;
-    --tn-text-primary: #c0caf5;
-    --tn-text-secondary: #9aa5ce;
-    --tn-accent: #7aa2f7;
-  }
-
-  :root[data-theme="dark"] {
-    /* Tokyo Night Theme */
+    /* Tokyo Night Theme (Dark Only) */
     --bg-primary: #1a1b26;
     --bg-secondary: #24283b;
     --text-primary: #c0caf5;
@@ -35,17 +14,14 @@
     --surface: #16161e;
     --hover: #2f334d;
     --divider: #3b4261;
-  }
-
-  [data-theme="light"] {
-    --tn-bg-primary: #f7f7f7;
-    --tn-bg-secondary: #ffffff;
-    --tn-surface: #ffffff;
-    --tn-hover: #f0f0f0;
-    --tn-divider: #e0e0e0;
-    --tn-text-primary: #24292e;
-    --tn-text-secondary: #586069;
-    --tn-accent: #0366d6;
+    --tn-bg-primary: #1a1b23;
+    --tn-bg-secondary: #16161e;
+    --tn-surface: #24283b;
+    --tn-hover: #414868;
+    --tn-divider: #292e42;
+    --tn-text-primary: #c0caf5;
+    --tn-text-secondary: #9aa5ce;
+    --tn-accent: #7aa2f7;
   }
 
   * {
@@ -73,7 +49,6 @@ footer p a {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
 
 footer p strong {
   color: #f7768e; /* TokyoNight Red */
@@ -108,10 +83,6 @@ footer p .blue-text {
     padding: 0.125rem 0.25rem;
     border-radius: 0.25rem;
     font-weight: 500;
-  }
-  
-  [data-theme="light"] mark {
-    background-color: rgba(255, 235, 59, 0.5);
   }
   
   /* Line clamp utility */

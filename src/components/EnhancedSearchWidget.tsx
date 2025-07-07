@@ -1,29 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, Settings, Zap, FileText } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { BlogPost } from '../types';
-import { useSearch } from '../hooks/useSearch';
 import { useAdvancedSearch } from '../hooks/useAdvancedSearch';
 
 interface EnhancedSearchWidgetProps {
   blogPosts: BlogPost[];
 }
 
-type SearchMode = 'basic' | 'advanced';
-
 export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [searchMode, setSearchMode] = useState<SearchMode>('basic');
-  const [showSettings, setShowSettings] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Use both search hooks
-  const basicSearch = useSearch(blogPosts, query);
-  const advancedSearch = useAdvancedSearch(blogPosts, query);
-
-  // Choose which search results to use based on mode
-  const currentSearch = searchMode === 'advanced' ? advancedSearch : basicSearch;
+  // Use only advanced search for comprehensive results
+  const { searchResults, isSearching, hasResults, contentLoadingProgress } = useAdvancedSearch(blogPosts, query);
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -43,7 +34,7 @@ export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
-  // Handle clicks outside - improved version
+  // Handle clicks outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (isOpen && modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -52,7 +43,6 @@ export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
     };
 
     if (isOpen) {
-      // Add a small delay to prevent immediate closing when opening
       const timeoutId = setTimeout(() => {
         document.addEventListener('mousedown', handleClickOutside);
       }, 100);
@@ -67,7 +57,6 @@ export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
   const closeSearch = () => {
     setIsOpen(false);
     setQuery('');
-    setShowSettings(false);
   };
 
   const handleResultClick = (post: BlogPost) => {
@@ -78,11 +67,6 @@ export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
   const clearSearch = () => {
     setQuery('');
     inputRef.current?.focus();
-  };
-
-  const toggleSearchMode = () => {
-    setSearchMode(prev => prev === 'basic' ? 'advanced' : 'basic');
-    setShowSettings(false);
   };
 
   return (
@@ -116,7 +100,7 @@ export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder={`Search ${searchMode === 'advanced' ? 'content and metadata' : 'titles and descriptions'}...`}
+                  placeholder="Search titles, descriptions, and content..."
                   className="w-full pl-10 pr-10 py-3 bg-transparent border-none outline-none text-white placeholder-white/60 text-lg"
                   autoFocus
                 />
@@ -129,15 +113,6 @@ export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
                   </button>
                 )}
               </div>
-              
-              {/* Settings Button */}
-              <button
-                onClick={() => setShowSettings(!showSettings)}
-                className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                title="Search Settings"
-              >
-                <Settings className="w-5 h-5" />
-              </button>
 
               {/* Close Button */}
               <button
@@ -149,65 +124,44 @@ export function EnhancedSearchWidget({ blogPosts }: EnhancedSearchWidgetProps) {
               </button>
             </div>
 
-            {/* Settings Panel */}
-            {showSettings && (
-              <div className="p-4 border-b border-white/10 bg-white/5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-2">
-                      {searchMode === 'basic' ? (
-                        <Zap className="w-4 h-4 text-blue-400" />
-                      ) : (
-                        <FileText className="w-4 h-4 text-purple-400" />
-                      )}
-                      <span className="text-sm font-medium">
-                        {searchMode === 'basic' ? 'Basic Search' : 'Advanced Search'}
-                      </span>
-                    </div>
-                    <span className="text-xs text-white/60">
-                      {searchMode === 'basic' 
-                        ? 'Search titles and descriptions only'
-                        : 'Search full content of posts'
-                      }
-                    </span>
+            {/* Content Loading Progress */}
+            {contentLoadingProgress < 1 && query.length >= 2 && (
+              <div className="px-4 py-2 bg-white/5 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 bg-white/10 rounded-full h-2">
+                    <div 
+                      className="bg-blue-400 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${contentLoadingProgress * 100}%` }}
+                    />
                   </div>
-                  <button
-                    onClick={toggleSearchMode}
-                    className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-md text-sm transition-colors"
-                  >
-                    Switch to {searchMode === 'basic' ? 'Advanced' : 'Basic'}
-                  </button>
+                  <span className="text-xs text-white/60">
+                    {Math.round(contentLoadingProgress * 100)}%
+                  </span>
                 </div>
-                
-                {searchMode === 'advanced' && (
-                  <div className="mt-2 text-xs text-white/60">
-                    Content loading progress: {Math.round(advancedSearch.contentLoadingProgress * 100)}%
-                  </div>
-                )}
               </div>
             )}
 
             {/* Results */}
             <div className="max-h-96 overflow-y-auto">
-              {currentSearch.isSearching && (
+              {isSearching && (
                 <div className="p-4 text-center text-white/60">
                   <div className="animate-spin w-6 h-6 border-2 border-white/20 border-t-white/60 rounded-full mx-auto mb-2"></div>
                   Searching...
                 </div>
               )}
 
-              {!currentSearch.isSearching && query.length >= 2 && !currentSearch.hasResults && (
+              {!isSearching && query.length >= 2 && !hasResults && (
                 <div className="p-4 text-center text-white/60">
                   No results found for "{query}"
                 </div>
               )}
 
-              {!currentSearch.isSearching && query.length >= 2 && currentSearch.hasResults && (
+              {!isSearching && query.length >= 2 && hasResults && (
                 <div className="p-2">
                   <div className="text-xs text-white/60 px-2 py-1 mb-2">
-                    {currentSearch.searchResults.length} result{currentSearch.searchResults.length !== 1 ? 's' : ''} found
+                    {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} found
                   </div>
-                  {currentSearch.searchResults.map((post) => (
+                  {searchResults.map((post) => (
                     <button
                       key={post.id}
                       onClick={() => handleResultClick(post)}
