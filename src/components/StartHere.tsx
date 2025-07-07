@@ -2,95 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, MapPin, GraduationCap, Briefcase, Heart, Code, ArrowRight, Github, Twitter, Linkedin } from 'lucide-react';
 
-interface TimelineEvent {
-  year: string;
-  title: string;
-  description: string | React.ReactNode;
-  location?: string;
-  type: 'education' | 'work' | 'personal' | 'achievement';
-  icon: React.ReactNode;
-}
-
 interface YearlyAchievements {
   year: string;
   achievements: string[];
 }
-
-const timelineEvents: TimelineEvent[] = [
-  {
-    year: '2018',
-    title: 'First Tech Job',
-    description: 'Started my career as a software developer, learning the ropes of professional development.',
-    type: 'work',
-    icon: <Briefcase className="w-5 h-5" />
-  },
-  {
-    year: '2018-2020',
-    title: 'Education Journey',
-    description: (
-      <div className="space-y-2">
-        <div>• <strong>Class 10 (Matriculation)</strong> - Core subjects including Science and Mathematics <span className="text-green-400 font-bold">94.6%</span></div>
-        <div>• <strong>Class 12 (Higher Secondary)</strong> - Science stream (Physics, Chemistry, Mathematics) <span className="text-green-400 font-bold">93.6%</span></div>
-        <div>• <strong>Bachelor's in Computer Science</strong> - Discovered my passion for technology and software development</div>
-      </div>
-    ),
-    type: 'education',
-    icon: <GraduationCap className="w-5 h-5" />
-  },
-  {
-    year: '2020-2024',
-    title: 'College Journey & Achievements',
-    description: (
-      <div className="space-y-4">
-        <div className="text-sm font-medium text-[var(--text-primary)] mb-3">Key Highlights & Projects:</div>
-        
-        <div className="space-y-3">
-          <div className="flex items-start gap-3">
-            <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <div className="font-medium text-[var(--text-primary)]">🏗️ hello</div>
-              <div className="text-sm text-[var(--text-secondary)] mt-1">
-                xlvmlxmvlxmvlxmv
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <div className="font-medium text-[var(--text-primary)]">📊 ssfsf</div>
-              <div className="text-sm text-[var(--text-secondary)] mt-1">
-                sfsfsf
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <div className="font-medium text-[var(--text-primary)]">🎯 </div>
-              <div className="text-sm text-[var(--text-secondary)] mt-1">
-                sfsf
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0"></div>
-            <div>
-              <div className="font-medium text-[var(--text-primary)]">💡 [Add more achievements here]</div>
-              <div className="text-sm text-[var(--text-secondary)] mt-1">
-                You can add more college achievements, projects, or experiences here following the same format.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-    type: 'achievement',
-    icon: <GraduationCap className="w-5 h-5" />
-  },
-];
 
 const yearlyAchievements: YearlyAchievements[] = [
   {
@@ -104,22 +19,21 @@ const yearlyAchievements: YearlyAchievements[] = [
     year: '2024',
     achievements: [
       'Completed Bachelor\'s in Computer Science',
-      'Finished Capstone Project on Benchmarking Time-Series Databases',
-      'Started building Jacuzzi - a concurrent Database Page Cache'
+      '',
+      ''
     ]
   },
   {
     year: '2023',
     achievements: [
-      'Expanded expertise into systems design and architecture, building scalable solutions',
-      'Gave a Talk on Lamport\'s "Time and Clocks" paper at College'
+      ''
     ]
   },
   {
     year: '2022',
     achievements: [
       'Deepened understanding of computer science fundamentals',
-      'Started exploring distributed systems and databases'
+      ''
     ]
   },
   {
@@ -138,21 +52,6 @@ const yearlyAchievements: YearlyAchievements[] = [
 ];
 
 export function StartHere() {
-  const getTypeColor = (type: TimelineEvent['type']) => {
-    switch (type) {
-      case 'education':
-        return 'text-blue-400';
-      case 'work':
-        return 'text-green-400';
-      case 'personal':
-        return 'text-pink-400';
-      case 'achievement':
-        return 'text-purple-400';
-      default:
-        return 'text-[var(--accent)]';
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
       {/* Header */}
