@@ -96,26 +96,30 @@ const yearlyAchievements: YearlyAchievements[] = [
   {
     year: '2025',
     achievements: [
-      '',
-      ''
+      'Started building personal projects and exploring AI/ML',
+      'Focusing on systems programming and distributed systems'
     ]
   },
   {
     year: '2024',
     achievements: [
-      ''
+      'Completed Bachelor\'s in Computer Science',
+      'Finished Capstone Project on Benchmarking Time-Series Databases',
+      'Started building Jacuzzi - a concurrent Database Page Cache'
     ]
   },
   {
     year: '2023',
     achievements: [
-      'Expanded expertise into systems design and architecture, building scalable solutions.'
+      'Expanded expertise into systems design and architecture, building scalable solutions',
+      'Gave a Talk on Lamport\'s "Time and Clocks" paper at College'
     ]
   },
   {
     year: '2022',
     achievements: [
-      ''
+      'Deepened understanding of computer science fundamentals',
+      'Started exploring distributed systems and databases'
     ]
   },
   {
@@ -221,18 +225,18 @@ export function StartHere() {
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-6 max-w-3xl mx-auto">
           {yearlyAchievements.map((yearData, index) => (
-            <div key={index} className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--divider)] p-8 hover:shadow-xl transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--bg-secondary)]/80">
-              <h3 className="text-3xl font-bold text-[var(--text-primary)] mb-6">{yearData.year}</h3>
-              
-              <div className="space-y-4">
+            <div key={index} className="mb-8">
+              <h3 className="text-lg font-mono font-semibold mb-4" style={{ color: 'var(--accent)' }}>
+                {yearData.year}
+              </h3>
+              <div className="space-y-3 ml-4">
                 {yearData.achievements.map((achievement, achievementIndex) => (
-                  <div key={achievementIndex} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0 shadow-sm"></div>
-                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                  <div key={achievementIndex}>
+                    <span className="text-[var(--text-primary)] text-sm leading-relaxed">
                       {achievement}
-                    </p>
+                    </span>
                   </div>
                 ))}
               </div>
