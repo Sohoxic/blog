@@ -48,9 +48,9 @@ const timelineEvents: TimelineEvent[] = [
           <div className="flex items-start gap-3">
             <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0"></div>
             <div>
-              <div className="font-medium text-[var(--text-primary)]">🏗️ Started building Jacuzzi</div>
+              <div className="font-medium text-[var(--text-primary)]">🏗️ hello</div>
               <div className="text-sm text-[var(--text-secondary)] mt-1">
-                Jacuzzi is a concurrent Database Page Cache. It's built to avoid multiple rounds of Disk I/O by caching pages in userspace.
+                xlvmlxmvlxmvlxmv
               </div>
             </div>
           </div>
@@ -58,9 +58,9 @@ const timelineEvents: TimelineEvent[] = [
           <div className="flex items-start gap-3">
             <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0"></div>
             <div>
-              <div className="font-medium text-[var(--text-primary)]">📊 Finished Capstone Project on Benchmarking Time-Series Databases</div>
+              <div className="font-medium text-[var(--text-primary)]">📊 ssfsf</div>
               <div className="text-sm text-[var(--text-secondary)] mt-1">
-                Comprehensive analysis and benchmarking of time-series databases for observability workloads, focusing on performance optimization.
+                sfsfsf
               </div>
             </div>
           </div>
@@ -68,9 +68,9 @@ const timelineEvents: TimelineEvent[] = [
           <div className="flex items-start gap-3">
             <div className="w-2 h-2 bg-[var(--accent)] rounded-full mt-2 flex-shrink-0"></div>
             <div>
-              <div className="font-medium text-[var(--text-primary)]">🎯 Gave a Talk on Lamport's "Time and Clocks" paper at College</div>
+              <div className="font-medium text-[var(--text-primary)]">🎯 </div>
               <div className="text-sm text-[var(--text-secondary)] mt-1">
-                Presented complex distributed systems concepts to fellow students, explaining the fundamental principles of logical clocks and distributed consensus.
+                sfsf
               </div>
             </div>
           </div>
