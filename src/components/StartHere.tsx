@@ -105,10 +105,6 @@ export function StartHere() {
             {/* Navigation Bar */}
             <div>
               <nav className="flex items-center justify-center gap-8 text-sm">
-                <Link to="/about" className="text-orange-400 hover:text-orange-300 transition-colors underline decoration-2 underline-offset-4">
-                  about ↗
-                </Link>
-                <span className="text-[var(--text-secondary)]">-</span>
                 <Link to="/thesohoxictales" className="text-orange-400 hover:text-orange-300 transition-colors underline decoration-2 underline-offset-4">
                   blog ↗
                 </Link>
@@ -121,6 +117,53 @@ export function StartHere() {
           </div>
         </div>
       </header>
+
+      {/* $whoami Section */}
+      <section className="max-w-4xl mx-auto px-4 py-8">
+        <div className="bg-black rounded-xl border border-gray-700 p-6 shadow-xl">
+          <div className="font-mono text-sm">
+            {/* Terminal header */}
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-700">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <div className="text-gray-400 text-xs ml-2">terminal</div>
+            </div>
+            
+            {/* Terminal content */}
+            <div className="space-y-2">
+              <div className="text-gray-400">
+                <span className="text-green-400">soham@dev</span>:<span className="text-blue-400">~</span>$ <span className="text-white">whoami</span>
+              </div>
+              <div className="text-gray-300 leading-relaxed pl-4">
+                <span className="text-orange-400">soham</span> - CS graduate passionate about AI, systems programming, and building things that matter.
+              </div>
+              <div className="text-gray-300 leading-relaxed pl-4">
+                Currently working at <span 
+                  className="text-red-500 font-semibold cursor-help relative group" 
+                >
+                  Couchbase
+                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap border border-gray-600">
+                    COUCH = Clusters Of Unreliable Commodity Hardware
+                  </span>
+                </span>, a distributed database company.
+              </div>
+              <div className="text-gray-400 mt-3">
+                <span className="text-green-400">soham@dev</span>:<span className="text-blue-400">~</span>$ <span className="animate-pulse">█</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Fun fact note below terminal */}
+        <div className="mt-4 text-center">
+          <p className="text-[var(--text-secondary)] text-xs italic">
+            💡 Fun fact: Hover over <span className="text-red-400 font-semibold">Couchbase</span> in the terminal above to see what COUCH stands for!
+          </p>
+        </div>
+      </section>
 
       {/* Achievements by Year */}
       <main className="max-w-4xl mx-auto px-4 py-12">
