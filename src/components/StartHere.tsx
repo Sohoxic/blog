@@ -102,7 +102,7 @@ export function StartHere() {
                   about ↗
                 </Link>
                 <span className="text-[var(--text-secondary)]">-</span>
-                <Link to="/mynotes" className="text-orange-400 hover:text-orange-300 transition-colors underline decoration-2 underline-offset-4">
+                <Link to="/thesohoxictales" className="text-orange-400 hover:text-orange-300 transition-colors underline decoration-2 underline-offset-4">
                   blog ↗
                 </Link>
                 <span className="text-[var(--text-secondary)]">-</span>
@@ -150,7 +150,7 @@ export function StartHere() {
             Explore my thoughts on AI, systems, research, and everything in between.
           </p>
           <Link
-            to="/mynotes"
+            to="/thesohoxictales"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--accent)] text-white rounded-lg hover:bg-[var(--accent)]/80 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             Read My Blog
