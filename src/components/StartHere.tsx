@@ -1,10 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, GraduationCap, Briefcase, Heart, Code, ArrowRight, Github, Twitter, Linkedin } from 'lucide-react';
 
 interface YearlyAchievements {
   year: string;
   achievements: string[];
+}
+
+interface TerminalLine {
+  type: 'command' | 'output' | 'error';
+  content: string;
 }
 
 const yearlyAchievements: YearlyAchievements[] = [
@@ -52,6 +57,89 @@ const yearlyAchievements: YearlyAchievements[] = [
 ];
 
 export function StartHere() {
+  const [currentInput, setCurrentInput] = useState('');
+  const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
+    { type: 'command', content: 'whoami' },
+    { type: 'output', content: 'soham - CS graduate passionate about AI, systems programming, and building things that matter.' },
+    { type: 'output', content: 'Currently working at Couchbase, a distributed database company.' }
+  ]);
+  const [currentDirectory, setCurrentDirectory] = useState('~');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+
+  const handleCommand = (command: string) => {
+    const trimmedCommand = command.trim().toLowerCase();
+    const newHistory = [...terminalHistory, { type: 'command' as const, content: command }];
+
+    switch (trimmedCommand) {
+      case 'cd blog':
+      case 'cd thesohoxictales':
+        newHistory.push({ type: 'output' as const, content: 'Navigating to blog...' });
+        setTerminalHistory(newHistory);
+        setTimeout(() => navigate('/thesohoxictales'), 1000);
+        break;
+      
+      case 'cd proof-of-work':
+      case 'cd proof-of-work/':
+        newHistory.push({ type: 'output' as const, content: 'Navigating to proof-of-work section...' });
+        setTerminalHistory(newHistory);
+        setTimeout(() => {
+          const element = document.getElementById('what-ive-been-up-to');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 1000);
+        break;
+      
+      case 'ls':
+        newHistory.push({ type: 'output' as const, content: 'blog/  proof-of-work/  contact.txt' });
+        break;
+      
+      case 'pwd':
+        newHistory.push({ type: 'output' as const, content: `/home/soham${currentDirectory === '~' ? '' : currentDirectory}` });
+        break;
+      
+      case 'whoami':
+        newHistory.push({ type: 'output' as const, content: 'soham - CS graduate passionate about AI, systems programming, and building things that matter.' });
+        newHistory.push({ type: 'output' as const, content: 'Currently working at Couchbase, a distributed database company.' });
+        break;
+      
+      case 'help':
+        newHistory.push({ type: 'output' as const, content: 'Available commands: whoami, ls, pwd, cd blog, cd proof-of-work, help, clear' });
+        break;
+      
+      case 'clear':
+        setTerminalHistory([]);
+        setCurrentInput('');
+        return;
+      
+      case '':
+        // Empty command, just add a new prompt
+        break;
+      
+      default:
+        newHistory.push({ type: 'error' as const, content: `Command not found: ${command}. Type 'help' for available commands.` });
+        break;
+    }
+
+    setTerminalHistory(newHistory);
+    setCurrentInput('');
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleCommand(currentInput);
+    }
+  };
+
+  const handleTerminalClick = () => {
+    inputRef.current?.focus();
+  };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
       {/* Header */}
@@ -118,9 +206,9 @@ export function StartHere() {
         </div>
       </header>
 
-      {/* $whoami Section */}
+      {/* Interactive Terminal Section */}
       <section className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-black rounded-xl border border-gray-700 p-6 shadow-xl">
+        <div className="bg-black rounded-xl border border-gray-700 p-6 shadow-xl" onClick={handleTerminalClick}>
           <div className="font-mono text-sm">
             {/* Terminal header */}
             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-700">
@@ -133,25 +221,51 @@ export function StartHere() {
             </div>
             
             {/* Terminal content */}
-            <div className="space-y-2">
-              <div className="text-gray-400">
-                <span className="text-green-400">soham@dev</span>:<span className="text-blue-400">~</span>$ <span className="text-white">whoami</span>
-              </div>
-              <div className="text-gray-300 leading-relaxed pl-4">
-                <span className="text-orange-400">soham</span> - CS graduate passionate about AI, systems programming, and building things that matter.
-              </div>
-              <div className="text-gray-300 leading-relaxed pl-4">
-                Currently working at <span 
-                  className="text-red-500 font-semibold cursor-help relative group" 
-                >
-                  Couchbase
-                  <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap border border-gray-600">
-                    COUCH = Clusters Of Unreliable Commodity Hardware
-                  </span>
-                </span>, a distributed database company.
-              </div>
-              <div className="text-gray-400 mt-3">
-                <span className="text-green-400">soham@dev</span>:<span className="text-blue-400">~</span>$ <span className="animate-pulse">█</span>
+            <div className="space-y-1">
+              {terminalHistory.map((line, index) => (
+                <div key={index}>
+                  {line.type === 'command' ? (
+                    <div className="text-gray-400">
+                      <span className="text-green-400">soham@dev</span>:<span className="text-blue-400">{currentDirectory}</span>$ <span className="text-white">{line.content}</span>
+                    </div>
+                  ) : line.type === 'error' ? (
+                    <div className="text-red-400 pl-4">{line.content}</div>
+                  ) : (
+                    <div className="text-gray-300 pl-4">
+                      {line.content.includes('Couchbase') ? (
+                        <>
+                          {line.content.split('Couchbase')[0]}
+                          <span 
+                            className="text-red-500 font-semibold cursor-help relative group"
+                          >
+                            Couchbase
+                            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap border border-gray-600">
+                              COUCH = Clusters Of Unreliable Commodity Hardware
+                            </span>
+                          </span>
+                          {line.content.split('Couchbase')[1]}
+                        </>
+                      ) : (
+                        line.content
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+              
+              {/* Current input line */}
+              <div className="text-gray-400 flex">
+                <span className="text-green-400">soham@dev</span>:<span className="text-blue-400">{currentDirectory}</span>$ 
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={currentInput}
+                  onChange={(e) => setCurrentInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="bg-transparent border-none outline-none text-white ml-1 flex-1"
+                  autoFocus
+                />
+                <span className="animate-pulse text-white">█</span>
               </div>
             </div>
           </div>
@@ -160,7 +274,7 @@ export function StartHere() {
         {/* Fun fact note below terminal */}
         <div className="mt-4 text-center">
           <p className="text-[var(--text-secondary)] text-xs italic">
-            💡 Fun fact: Hover over <span className="text-red-400 font-semibold">Couchbase</span> in the terminal above to see what COUCH stands for!
+            💡 Try terminal commands like "cd blog", "ls", "help" • Hover over <span className="text-red-400 font-semibold">Couchbase</span> in the terminal above to see what COUCH stands for!
           </p>
         </div>
       </section>
