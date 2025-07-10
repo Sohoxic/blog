@@ -46,6 +46,21 @@ export function About() {
             </p>
           </div>
 
+          {/* Profile Picture */}
+          <div className="text-center mb-12">
+            <div className="relative inline-block">
+              <img
+                src="/profile-picture.jpeg"
+                alt="Soham coding"
+                className="w-48 h-48 rounded-full object-cover border-4 border-[var(--accent)] shadow-xl mx-auto"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[var(--accent)]/20 to-transparent"></div>
+            </div>
+            <p className="text-[var(--text-secondary)] text-sm mt-4 italic">
+              In my element - coding and building things that matter
+            </p>
+          </div>
+
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="bg-[var(--bg-secondary)] p-6 rounded-xl border border-[var(--divider)] text-center">

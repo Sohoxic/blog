@@ -59,7 +59,14 @@ export function StartHere() {
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Main Header Content */}
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">Hey, I'm Soham! 👋</h1>
+            <div className="mb-6">
+              <img
+                src="/profile-picture.jpeg"
+                alt="Soham"
+                className="w-24 h-24 rounded-full object-cover border-3 border-[var(--accent)] shadow-lg mx-auto mb-4"
+              />
+              <h1 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">Hey, I'm Soham! 👋</h1>
+            </div>
             <p className="text-[var(--text-secondary)] text-sm mb-6">
               Welcome to my corner of the internet. Here's a little about my journey so far.
             </p>
@@ -106,9 +113,9 @@ export function StartHere() {
                   blog ↗
                 </Link>
                 <span className="text-[var(--text-secondary)]">-</span>
-                <Link to="/projects" className="text-orange-400 hover:text-orange-300 transition-colors underline decoration-2 underline-offset-4">
-                  projects ↗
-                </Link>
+                <a href="#what-ive-been-up-to" className="text-orange-400 hover:text-orange-300 transition-colors underline decoration-2 underline-offset-4">
+                  proof-of-work ↗
+                </a>
               </nav>
             </div>
           </div>
@@ -117,10 +124,10 @@ export function StartHere() {
 
       {/* Achievements by Year */}
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">What I've Been Up To</h2>
+        <div className="text-center mb-12" id="what-ive-been-up-to">
+          <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">What I've Been Up To </h2>
           <p className="text-[var(--text-secondary)] text-sm">
-            A quick rundown of the stuff I've done over the years
+            A quick rundown of the stuff I've done over the years - my <span className="text-orange-400 font-mono font-semibold italic">proof of work!</span>
           </p>
         </div>
 
