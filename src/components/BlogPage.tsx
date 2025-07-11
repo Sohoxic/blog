@@ -5,7 +5,6 @@ import { blogPosts } from '../data/blogs';
 import { miniBlogs } from '../data/miniBlogs';
 import { BlogCard } from './BlogCard';
 import { MiniBlogCard } from './MiniBlogCard';
-import { EnhancedSearchWidget } from './EnhancedSearchWidget';
 
 export function BlogPage() {
   return (
@@ -29,9 +28,6 @@ export function BlogPage() {
                   <p className="text-[var(--text-secondary)] text-sm font-mono">// thoughts on tech, life, and everything in between</p>
                 </div>
               </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <EnhancedSearchWidget blogPosts={blogPosts} />
             </div>
           </div>
         </div>
