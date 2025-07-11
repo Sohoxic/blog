@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Newspaper, ArrowLeft, Github, Twitter, Linkedin } from 'lucide-react';
+import { Newspaper, ArrowLeft, Github, Twitter, Linkedin, Zap, Terminal } from 'lucide-react';
 import { blogPosts } from '../data/blogs';
+import { miniBlogs } from '../data/miniBlogs';
 import { BlogCard } from './BlogCard';
+import { MiniBlogCard } from './MiniBlogCard';
 import { EnhancedSearchWidget } from './EnhancedSearchWidget';
 
 export function BlogPage() {
@@ -14,17 +16,17 @@ export function BlogPage() {
             <div className="flex items-center gap-4">
               <Link
                 to="/"
-                className="flex items-center gap-2 px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors rounded-lg hover:bg-[var(--bg-primary)] border border-[var(--divider)] hover:border-[var(--accent)]"
+                className="flex items-center gap-2 px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors rounded-lg hover:bg-[var(--bg-primary)] border border-[var(--divider)] hover:border-[var(--accent)] font-mono"
                 title="Back to Start"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-medium">Start Here</span>
+                <span className="text-sm font-medium">cd ../</span>
               </Link>
               <div className="flex items-center gap-3">
-                <Newspaper className="w-8 h-8 text-[var(--accent)]" />
+                <Terminal className="w-8 h-8 text-[var(--accent)]" />
                 <div>
-                  <h1 className="text-2xl font-bold">The Sohoxic Tales</h1>
-                  <p className="text-[var(--text-secondary)] text-sm">Thoughts on tech, life, and everything in between</p>
+                  <h1 className="text-2xl font-bold font-mono">~/sohoxic/blog</h1>
+                  <p className="text-[var(--text-secondary)] text-sm font-mono">// thoughts on tech, life, and everything in between</p>
                 </div>
               </div>
             </div>
@@ -36,23 +38,49 @@ export function BlogPage() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
+        {/* Mini Blogs Section */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-[var(--text-secondary)] font-mono text-sm">$</span>
+            <Zap className="w-6 h-6 text-[var(--accent)]" />
+            <h2 className="text-xl font-bold text-[var(--text-primary)] font-mono">ls mini-blogs/</h2>
+            <span className="text-[var(--text-secondary)] text-sm font-mono">// quick thoughts, code snippets, and book notes</span>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {miniBlogs.map((miniBlog) => (
+              <MiniBlogCard key={miniBlog.id} miniBlog={miniBlog} />
+            ))}
+          </div>
+        </section>
+
+        {/* Main Blog Posts Section */}
+        <section>
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-[var(--text-secondary)] font-mono text-sm">$</span>
+            <Newspaper className="w-6 h-6 text-[var(--accent)]" />
+            <h2 className="text-xl font-bold text-[var(--text-primary)] font-mono">ls articles/</h2>
+            <span className="text-[var(--text-secondary)] text-sm font-mono">// in-depth posts and tutorials</span>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {blogPosts.map((post) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
+        </section>
       </main>
 
       <footer className="mt-16 pt-8 border-t border-[var(--divider)] text-center text-[var(--text-secondary)]">
         <div className="flex items-center justify-center gap-6 flex-wrap">
-          <div className="text-sm">
-            <span>&copy; 2025 Soham Sarkar</span>
+          <div className="text-sm font-mono">
+            <span className="text-[var(--text-secondary)]">/*</span>
+            <span className="mx-2">&copy; 2025 Soham Sarkar</span>
             <span className="mx-2">|</span>
             <strong className="text-red-400">AI</strong>
             <span className="mx-2">|</span>
             <span>Systems</span>
             <span className="mx-2">|</span>
             <span>Research</span>
+            <span className="mx-2 text-[var(--text-secondary)]">*/</span>
           </div>
           <div className="flex items-center gap-4">
             <a

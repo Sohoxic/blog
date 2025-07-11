@@ -265,16 +265,18 @@ export function StartHere() {
                   className="bg-transparent border-none outline-none text-white ml-1 flex-1"
                   autoFocus
                 />
-                <span className="animate-pulse text-white">█</span>
               </div>
             </div>
           </div>
         </div>
         
         {/* Fun fact note below terminal */}
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center space-y-1">
           <p className="text-[var(--text-secondary)] text-xs italic">
-            💡 Try terminal commands like "cd blog", "ls", "help" • Hover over <span className="text-red-400 font-semibold">Couchbase</span> in the terminal above to see what COUCH stands for!
+            💡 Try terminal commands like <span className="font-mono text-orange-400">"cd blog"</span>, <span className="font-mono text-orange-400">"ls"</span>, <span className="font-mono text-orange-400">"help"</span>, <span className="font-mono text-orange-400">"pwd"</span>, <span className="font-mono text-orange-400">"whoami"</span>, <span className="font-mono text-orange-400">"clear"</span>
+          </p>
+          <p className="text-[var(--text-secondary)] text-xs italic">
+            ✨ Hover over <span className="text-red-400 font-semibold">Couchbase</span> in the terminal above to see what COUCH stands for!
           </p>
         </div>
       </section>
@@ -326,14 +328,16 @@ export function StartHere() {
       {/* Footer */}
       <footer className="mt-16 pt-8 pb-11 border-t border-[var(--divider)] text-center text-[var(--text-secondary)]">
         <div className="flex items-center justify-center gap-6 flex-wrap">
-          <div className="text-sm">
-            <span>&copy; 2025 Soham Sarkar</span>
+          <div className="text-sm font-mono">
+            <span className="text-[var(--text-secondary)]">/*</span>
+            <span className="mx-2">&copy; 2025 Soham Sarkar</span>
             <span className="mx-2">|</span>
             <strong className="text-red-400">AI</strong>
             <span className="mx-2">|</span>
             <span>Systems</span>
             <span className="mx-2">|</span>
             <span>Research</span>
+            <span className="mx-2 text-[var(--text-secondary)]">*/</span>
           </div>
           <div className="flex items-center gap-4">
             <a

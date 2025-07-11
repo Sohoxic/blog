@@ -29,9 +29,28 @@
   }
 
   body {
-    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-mono text-lg transition-colors duration-300;
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-mono text-base transition-colors duration-300;
     background-color: rgb(var(--tn-bg-primary));
     color: rgb(var(--tn-text-primary));
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--divider);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
   }
 }
 
@@ -91,5 +110,40 @@ footer p .blue-text {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Terminal-like selection */
+  ::selection {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+  }
+
+  /* Subtle animation for programmer feel */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  /* Code-like text styling */
+  .code-text {
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-variant-ligatures: common-ligatures;
   }
 }

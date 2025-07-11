@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Type Inference in Go</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/dark-theme.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="site-title">Understanding Type Inference in Go</h1>
+        </header>
+        <main class="content">
+            <p>In Go, <strong>numbers like <code>1</code>, <code>2.5</code>, <code>-3</code> don't have a type until you use them</strong> in a context where a type is expected.</p>
+<p>Go allows the compiler to <strong>infer the type</strong> of a number based on how it's being used.</p>
+<hr />
+<h2>📌 Statement</h2>
+<blockquote>
+<p>A number can be given a type by using it in a context that requires one, such as a variable assignment or function call.<br />
+For example, here <code>math.Sin</code> expects a <code>float64</code>.</p>
+</blockquote>
+<hr />
+<h2>Example</h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;math&quot;</span>
+
+<span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Sin</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>What's happening here?</h3>
+<ul>
+<li>
+<p>1 is a numeric literal without an explicit type.</p>
+</li>
+<li>
+<p>math.Sin is a function that expects a float64 parameter.</p>
+</li>
+</ul>
+<blockquote>
+<p>Since you're passing 1 into math.Sin, Go automatically treats 1 as float64. Even though you didn’t write 1.0 or cast it like float64(1), Go infers the type because of the context.</p>
+</blockquote>
+        </main>
+<!--         <footer>
+            <p>&copy; 2025 Soham Sarkar | 
+                <a href="https://sarkarsoham.com">sarkarsoham.com</a> | 
+                <strong>AI</strong> | 
+                <span class="blue-text">Systems</span> | 
+                <span class="white-text">Research</span>
+            </p>
+        </footer>         -->
+        <footer>
+            <p>&copy; 2025 <a href="https://sarkarsoham.com">Soham Sarkar</a> | Built with ❤️ by <a href="https://github.com/Sohoxic/toxic">toxic!</a> 🧪</p>
+        </footer>
+    </div>
+</body>
+</html>
