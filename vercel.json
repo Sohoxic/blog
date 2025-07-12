@@ -1,8 +1,20 @@
 {
+  "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/home",
+      "destination": "/starthere.html"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/starthere.html",
+      "destination": "/home",
+      "permanent": true
     }
   ]
 } 
