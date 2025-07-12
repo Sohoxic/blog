@@ -42,6 +42,48 @@ function App() {
     );
   };
 
+  // Home route component - for local development
+  const HomeRoute = () => {
+    useEffect(() => {
+      // In development, redirect to starthere.html
+      // In production, Vercel handles this rewrite
+      window.location.href = '/starthere.html';
+    }, []);
+    
+    return (
+      <>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '100vh', 
+          backgroundColor: '#1a1b26', 
+          color: '#c0caf5', 
+          fontFamily: 'monospace' 
+        }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ 
+              border: '2px solid #7aa2f7', 
+              borderRadius: '50%', 
+              width: '40px', 
+              height: '40px', 
+              margin: '0 auto 20px', 
+              borderTop: '2px solid transparent', 
+              animation: 'spin 1s linear infinite' 
+            }}></div>
+            <p>Loading home...</p>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   // Redirect component for the blog path
   const RedirectToBlog = () => {
     useEffect(() => {
@@ -86,6 +128,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<RedirectToHome />} />
+        <Route path="/home" element={<HomeRoute />} />
         <Route path="/thesohoxictales" element={<RedirectToBlog />} />
       </Routes>
     </Router>
