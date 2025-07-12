@@ -16,7 +16,7 @@ blog/
 │   ├── thesohoxictales.html    # Blog listing page in terminal style
 │   ├── blog/                   # Individual blog posts
 │   │   └── first-post.html
-│   ├── mini-blogs/             # Quick thoughts and learnings 
+│   ├── quick-notes/            # Quick thoughts and learnings 
 │   ├── articles/               # In-depth posts 
 │   └── assets/                 # CSS, images, and other static assets
 │       ├── css/
@@ -65,7 +65,7 @@ This blog uses a **hybrid approach** combining the best of static sites and Reac
 
 ### Blog Page (`thesohoxictales.html`)
 - **Terminal-themed UI**: Consistent with homepage design
-- **Mini-blogs**: Quick thoughts, code snippets, book notes
+- **Quick Notes**: Quick thoughts, code snippets, book notes etc
 - **Articles**: In-depth posts and tutorials
 - **Command-line Style**: File listing with `cat` commands and metadata
 
