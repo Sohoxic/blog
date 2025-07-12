@@ -3,18 +3,11 @@
   "rewrites": [
     {
       "source": "/home",
-      "destination": "/starthere.html"
+      "destination": "/starthere"
     },
     {
       "source": "/(.*)",
       "destination": "/index.html"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/starthere.html",
-      "destination": "/home",
-      "permanent": true
     }
   ]
 } 
