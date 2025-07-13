@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go `if` Statement with Short Variable Declaration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/dark-theme.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="site-title">Go `if` Statement with Short Variable Declaration</h1>
+        </header>
+        <main class="content">
+            <p>This Go code demonstrates how to use a short variable declaration (<code>:=</code>) inside an <code>if</code> statement and how control flows through multiple conditional branches.</p>
+<hr />
+<h2>✅ Code</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;is negative&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;has 1 digit&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;has multiple digits&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<p>Here num is getting declared at the start of the if statement here <code>num := 9</code> and then directly being used to check the conditions</p>
+</blockquote>
+        </main>
+<!--         <footer>
+            <p>&copy; 2025 Soham Sarkar | 
+                <a href="https://sarkarsoham.com">sarkarsoham.com</a> | 
+                <strong>AI</strong> | 
+                <span class="blue-text">Systems</span> | 
+                <span class="white-text">Research</span>
+            </p>
+        </footer>         -->
+        <footer>
+            <p>&copy; 2025 <a href="https://sarkarsoham.com">Soham Sarkar</a> | Built with ❤️ by <a href="https://github.com/Sohoxic/toxic">toxic!</a> 🧪</p>
+        </footer>
+    </div>
+</body>
+</html>
