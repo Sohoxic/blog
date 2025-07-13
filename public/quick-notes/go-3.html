@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go vs JavaScript: Understanding the Concurrency Execution Models</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/dark-theme.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="site-title">Go vs JavaScript: Understanding the Concurrency Execution Models</h1>
+        </header>
+        <main class="content">
+            <h2>Paragraph 1: JavaScript's async/await</h2>
+<blockquote>
+<p>Most JavaScript developers switching to Go often ask "where's async/await?" and it reveals a fundamental misunderstanding of execution models. In JavaScript, async/await exists because V8 runs on a single OS thread with an event loop. Every syscall would block the entire process, so we needed continuation-passing style wrapped in promises. Async/await is syntactic sugar over state machines that compile function bodies into multiple resumption points, yielding execution back to the event loop scheduler.</p>
+</blockquote>
+<h3>Explanation</h3>
+<ul>
+<li>
+<p><strong>"Where's async/await?"</strong><br />
+  JavaScript developers expect a language feature for handling asynchronous operations, but Go handles it differently.</p>
+</li>
+<li>
+<p><strong>"V8 runs on a single OS thread with an event loop."</strong><br />
+  JavaScript (e.g., in browsers or Node.js) is single-threaded with an event loop to handle asynchronous operations.</p>
+</li>
+<li>
+<p><strong>"Every syscall would block the entire process..."</strong><br />
+  Blocking system calls would halt execution, so async was required.</p>
+</li>
+<li>
+<p><strong>"Continuation-passing style wrapped in promises."</strong><br />
+  JavaScript used callbacks, then Promises to model async behavior.</p>
+</li>
+<li>
+<p><strong>"Async/await is syntactic sugar over state machines..."</strong><br />
+<code>async/await</code> makes async code look synchronous by compiling it into resumable state machines.</p>
+</li>
+</ul>
+<hr />
+<h2>Paragraph 2: Go's M:N threading and netpoller</h2>
+<blockquote>
+<p>Go doesn't need async/await because it implements M:N threading. The runtime multiplexes M goroutines across N OS threads using a work-stealing scheduler. When a goroutine makes a blocking syscall, the runtime detects this via netpoller (epoll/kqueue) integration and parks the goroutine, moving the OS thread to service other runnable goroutines from the global or local run queues. The segmented stacks start at 2KB and grow dynamically, allowing millions of goroutines with minimal memory overhead.</p>
+</blockquote>
+<h3>Explanation</h3>
+<ul>
+<li>
+<p><strong>"M:N threading."</strong><br />
+  Go schedules many goroutines onto fewer OS threads.</p>
+</li>
+<li>
+<p><strong>"Work-stealing scheduler."</strong><br />
+  Go's scheduler dynamically balances goroutines across threads.</p>
+</li>
+<li>
+<p><strong>"Blocking syscall and netpoller."</strong><br />
+  Blocking operations are intercepted by Go's runtime, allowing the OS thread to do other work.</p>
+</li>
+<li>
+<p><strong>"Segmented stacks."</strong><br />
+  Goroutines use minimal memory, enabling millions of them to run.</p>
+</li>
+</ul>
+<hr />
+<h2>Paragraph 3: Technical differences in execution models</h2>
+<blockquote>
+<p>The technical difference is fundamental. JavaScript's async transforms your control flow into a continuation monad that gets scheduled cooperatively. You're explicitly managing asynchrony at the language level. Go's runtime handles preemptive scheduling transparently. A blocking read() syscall gets intercepted by the runtime, the goroutine gets parked in the netpoller's waiting list, and execution continues elsewhere. When the file descriptor becomes ready, the runtime resumes the goroutine.</p>
+</blockquote>
+<h3>Explanation</h3>
+<ul>
+<li>
+<p><strong>"Continuation monad, cooperatively scheduled."</strong><br />
+  JavaScript async functions pause and resume with developer-managed control.</p>
+</li>
+<li>
+<p><strong>"Explicit async control."</strong><br />
+  Developers must use <code>async</code> and <code>await</code>.</p>
+</li>
+<li>
+<p><strong>"Go's preemptive scheduling."</strong><br />
+  Go's runtime handles all concurrency transparently.</p>
+</li>
+<li>
+<p><strong>"Blocking syscalls are handled internally."</strong><br />
+  Goroutines are paused and resumed automatically without developer intervention.</p>
+</li>
+</ul>
+<hr />
+<h2>Paragraph 4: Go code looks synchronous but is concurrent</h2>
+<blockquote>
+<p>This is why Go code looks "boring" to JavaScript developers. There's no colored function problem, no promise microtask queue semantics, no await keyword infecting your call stack. You write synchronous-looking code that gets automatically transformed into efficient asynchronous operations by the compiler and runtime. The goroutine scheduler achieves better cache locality and lower context switch overhead than JavaScript's event loop because it's operating at the language runtime level, not forcing userland state machines.</p>
+</blockquote>
+<h3>Explanation</h3>
+<ul>
+<li>
+<p><strong>"Go code looks boring."</strong><br />
+  Because it avoids special async syntax and appears synchronous.</p>
+</li>
+<li>
+<p><strong>"No colored function problem."</strong><br />
+  Functions aren't classified as async vs sync — all functions are composable.</p>
+</li>
+<li>
+<p><strong>"No microtask semantics."</strong><br />
+  No promise queues or await interleaving.</p>
+</li>
+<li>
+<p><strong>"Compiler and runtime transform code."</strong><br />
+  Goroutines make code efficient under the hood, while the syntax remains clean.</p>
+</li>
+<li>
+<p><strong>"Better performance characteristics."</strong><br />
+  Go achieves better cache usage and avoids OS-level context switches.</p>
+</li>
+</ul>
+<hr />
+<h2>Paragraph 5: Eliminating async contagion in Go</h2>
+<blockquote>
+<p>Go's approach eliminates the async contagion problem entirely. In JavaScript, once you call an async function, everything up the call stack must become async. Go's transparent I/O multiplexing means you can compose blocking and non-blocking operations without syntactic interleaving. The runtime's integrated netpoller and work-stealing scheduler provide better performance characteristics than userland promise queues and microtask scheduling.</p>
+</blockquote>
+<h3>Explanation</h3>
+<ul>
+<li>
+<p><strong>"Async contagion."</strong><br />
+  In JavaScript, <code>async</code> propagates up the stack, affecting the entire codebase.</p>
+</li>
+<li>
+<p><strong>"Go allows mixing of operations."</strong><br />
+  Go code can block or not block without changing the function signature or syntax.</p>
+</li>
+<li>
+<p><strong>"Transparent I/O multiplexing."</strong><br />
+  Handled entirely by Go’s runtime, not the developer.</p>
+</li>
+<li>
+<p><strong>"Better performance characteristics."</strong><br />
+  Go’s netpoller and scheduler are more efficient than JavaScript’s userland mechanisms.</p>
+</li>
+</ul>
+<hr />
+<h2>Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>JavaScript</th>
+<th>Go</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Concurrency Model</td>
+<td>Single-threaded, event loop + Promises</td>
+<td>M:N threading with goroutines</td>
+</tr>
+<tr>
+<td>Async Syntax</td>
+<td>Explicit (<code>async/await</code>)</td>
+<td>Implicit (no syntax)</td>
+</tr>
+<tr>
+<td>Scheduler</td>
+<td>Cooperative (microtask/event loop)</td>
+<td>Preemptive (runtime scheduler)</td>
+</tr>
+<tr>
+<td>Async Contagion</td>
+<td>Yes (<code>async</code> infects call stack)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Stack Size</td>
+<td>Large (1MB+) per thread</td>
+<td>Small (2KB, grows dynamically)</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Depends on event loop, microtasks</td>
+<td>Efficient due to netpoller + scheduler</td>
+</tr>
+</tbody>
+</table>
+        </main>
+<!--         <footer>
+            <p>&copy; 2025 Soham Sarkar | 
+                <a href="https://sarkarsoham.com">sarkarsoham.com</a> | 
+                <strong>AI</strong> | 
+                <span class="blue-text">Systems</span> | 
+                <span class="white-text">Research</span>
+            </p>
+        </footer>         -->
+        <footer>
+            <p>&copy; 2025 <a href="https://sarkarsoham.com">Soham Sarkar</a> | Built with ❤️ by <a href="https://github.com/Sohoxic/toxic">toxic!</a> 🧪</p>
+        </footer>
+    </div>
+</body>
+</html>
