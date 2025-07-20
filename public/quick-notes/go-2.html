@@ -143,64 +143,95 @@
         }
         
         /* Mobile navigation */
-        .nav-toggle {
+        .mobile-nav-toggle {
             display: none;
             flex-direction: column;
-            gap: 3px;
-            cursor: pointer;
+            gap: 4px;
             padding: 0.5rem;
+            background: none;
+            border: 1px solid #7aa2f7;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .nav-toggle span {
+        .mobile-nav-toggle span {
             width: 20px;
             height: 2px;
-            background: #9aa5ce;
+            background: #7aa2f7;
             border-radius: 1px;
             transition: all 0.3s ease;
+        }
+        
+        .mobile-nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .mobile-nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        /* Mobile navigation menu - hidden by default */
+        .mobile-nav-menu {
+            display: none !important;
         }
         
         /* Responsive design */
         @media (max-width: 768px) {
             .nav-container {
-                padding: 0 1rem;
+                padding: 0 2rem;
+                justify-content: space-between !important;
             }
             
             .nav-links {
-                display: none;
+                display: none !important;
+            }
+            
+            .mobile-nav-toggle {
+                display: flex !important;
+            }
+            
+            .mobile-nav-menu {
+                display: none !important;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 right: 0;
                 background: #1a1b26;
                 border-top: 1px solid #414868;
-                flex-direction: column;
-                gap: 0;
-                padding: 1rem 0;
+                padding: 1rem;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                z-index: 1000;
             }
             
-            .nav-links.active {
-                display: flex;
+            .mobile-nav-menu.active {
+                display: block !important;
             }
             
-            .nav-link {
-                width: 100%;
-                padding: 1rem 2rem;
+            .mobile-nav-menu a {
+                display: flex !important;
+                padding: 1rem;
+                color: #9aa5ce;
+                text-decoration: none;
+                border-bottom: 1px solid #414868;
+                transition: all 0.3s ease;
+                font-size: 1.1rem;
+                min-height: 3rem;
+                align-items: center;
                 border-radius: 0;
-                border: none;
-                border-bottom: 1px solid #2a2e42;
             }
             
-            .nav-link:last-child {
+            .mobile-nav-menu a:hover {
+                color: #7aa2f7;
+                background: #24283b;
+            }
+            
+            .mobile-nav-menu a:last-child {
                 border-bottom: none;
-            }
-            
-            .nav-divider {
-                display: none;
-            }
-            
-            .nav-toggle {
-                display: flex;
             }
             
             .nav-header {
@@ -343,10 +374,22 @@
                 </a>
             </div>
             
-            <div class="nav-toggle">
+            <div class="mobile-nav-toggle" id="mobile-nav-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+                <a href="/home/">
+                    <span style="margin-right: 0.5rem;">🏠</span>
+                    Home
+                </a>
+                <a href="/thesohoxictales/">
+                    <span style="margin-right: 0.5rem;">📰</span>
+                    Blog
+                </a>
             </div>
         </div>
     </nav>
@@ -380,26 +423,31 @@
     
     <script>
         // Mobile navigation toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
+        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+        const mobileNavMenu = document.querySelector('.mobile-nav-menu');
         
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        
-        // Close mobile nav when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-        
-        // Close mobile nav when clicking on a link
-        navLinks.addEventListener('click', (e) => {
-            if (e.target.classList.contains('nav-link')) {
-                navLinks.classList.remove('active');
-            }
-        });
+        if (mobileNavToggle && mobileNavMenu) {
+            mobileNavToggle.addEventListener('click', () => {
+                mobileNavMenu.classList.toggle('active');
+                mobileNavToggle.classList.toggle('active');
+            });
+            
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileNavToggle.contains(e.target) && !mobileNavMenu.contains(e.target)) {
+                    mobileNavMenu.classList.remove('active');
+                    mobileNavToggle.classList.remove('active');
+                }
+            });
+            
+            // Close mobile nav when clicking on a link
+            mobileNavMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    mobileNavMenu.classList.remove('active');
+                    mobileNavToggle.classList.remove('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>
