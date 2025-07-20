@@ -239,23 +239,34 @@
             }
             
             .container {
-                padding: 0 0.1rem;
+                padding: 0;
             }
             
             /* Mobile: Remove card styling and make content full screen */
             .content-card {
                 border: none !important;
                 border-radius: 0 !important;
-                padding: 0.1rem !important;
+                padding: 0 !important;
                 box-shadow: none !important;
                 min-height: calc(100vh - 6rem) !important;
+                margin: 0 !important;
             }
             
             .site-title {
-                margin-bottom: 1.5rem !important;
+                margin: 0 0 1.5rem 0 !important;
                 font-size: 1.5rem !important;
                 border-bottom: 1px solid #414868 !important;
-                padding-bottom: 0.75rem !important;
+                padding: 0.75rem 0.5rem 0.75rem 0.5rem !important;
+            }
+            
+            .content {
+                padding: 0.5rem !important;
+                margin: 0 !important;
+            }
+            
+            .content p, .content h1, .content h2, .content h3, .content pre, .content blockquote {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
         }
         
