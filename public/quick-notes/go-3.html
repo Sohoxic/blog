@@ -8,11 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+      <!-- Favicon -->
+      <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+      
     <style>
         /* Base styling */
         * {
@@ -188,7 +189,7 @@
         /* Responsive design */
         @media (max-width: 768px) {
             .nav-container {
-                padding: 0 2rem;
+                padding: 0 1rem;
                 justify-content: space-between !important;
             }
             
@@ -208,7 +209,7 @@
                 right: 0;
                 background: #1a1b26;
                 border-top: 1px solid #414868;
-                padding: 1rem;
+                padding: 0;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
                 z-index: 1000;
             }
@@ -243,11 +244,21 @@
                 position: relative;
             }
             
-            .container {
-                padding: 0;
+            /* Brand section - remove padding */
+            .brand-section {
+                padding: 0 !important;
+                margin: 0 !important;
             }
             
-            /* Mobile: Remove card styling and make content full screen */
+            /* Remove all container constraints on mobile */
+            .container {
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: none !important;
+                width: 100% !important;
+            }
+            
+            /* Remove all card styling and make content full screen */
             .content-card {
                 border: none !important;
                 border-radius: 0 !important;
@@ -255,23 +266,58 @@
                 box-shadow: none !important;
                 min-height: calc(100vh - 6rem) !important;
                 margin: 0 !important;
+                width: 100% !important;
             }
             
             .site-title {
-                margin: 0 0 1.5rem 0 !important;
+                margin: 0 !important;
                 font-size: 1.5rem !important;
                 border-bottom: 1px solid #414868 !important;
-                padding: 0.75rem 0.5rem 0.75rem 0.5rem !important;
+                padding: 1rem !important;
+                width: 100% !important;
             }
             
             .content {
-                padding: 0.5rem !important;
+                padding: 1rem !important;
                 margin: 0 !important;
+                width: 100% !important;
             }
             
             .content p, .content h1, .content h2, .content h3, .content pre, .content blockquote {
                 margin-left: 0 !important;
                 margin-right: 0 !important;
+            }
+            
+            /* Code blocks and pre should also be full width */
+            .content pre {
+                margin: 1rem 0 !important;
+                border-radius: 0 !important;
+                width: calc(100% + 2rem) !important;
+                margin-left: -1rem !important;
+                margin-right: -1rem !important;
+                padding: 1rem !important;
+            }
+            
+            .content blockquote {
+                margin: 1rem 0 !important;
+                width: calc(100% + 2rem) !important;
+                margin-left: -1rem !important;
+                margin-right: -1rem !important;
+                padding: 1rem !important;
+                padding-left: 2rem !important;
+            }
+            
+            /* Ensure footer also takes full width */
+            .content-card footer {
+                padding: 1rem !important;
+                margin: 0 !important;
+                width: 100% !important;
+            }
+            
+            /* Ensure body has no margin/padding */
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
             }
         }
         
