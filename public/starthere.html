@@ -68,6 +68,14 @@
         .content-root {
             position: relative;
             z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ensure main grows to push footer to the bottom */
+        .content-root main {
+            flex: 1 0 auto;
         }
 
         /* StartHere-specific styling (adapted for light theme via CSS variables) */
@@ -519,6 +527,12 @@
                 font-size: 12px;
                 padding: 1rem;
             }
+
+            /* Make timeline content use more width on small screens */
+            .timeline-section { padding: 0 1rem; }
+            .timeline-item { margin-left: 0; margin-right: 0; }
+            .timeline-content { margin-left: 0; }
+            .timeline-content .achievement-list { padding-left: 1rem; }
 
             .footer-content {
                 flex-direction: column;
