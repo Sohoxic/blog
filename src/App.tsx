@@ -21,8 +21,8 @@ function App() {
           justifyContent: 'center', 
           alignItems: 'center', 
           height: '100vh', 
-          backgroundColor: '#1a1b26', 
-          color: '#c0caf5', 
+          backgroundColor: '#ffffff', 
+          color: '#1f2937', 
           fontFamily: 'monospace' 
         }}>
           <div style={{ textAlign: 'center' }}>
@@ -63,8 +63,8 @@ function App() {
           justifyContent: 'center', 
           alignItems: 'center', 
           height: '100vh', 
-          backgroundColor: '#1a1b26', 
-          color: '#c0caf5', 
+          backgroundColor: '#ffffff', 
+          color: '#1f2937', 
           fontFamily: 'monospace' 
         }}>
           <div style={{ textAlign: 'center' }}>
@@ -103,8 +103,8 @@ function App() {
           justifyContent: 'center', 
           alignItems: 'center', 
           height: '100vh', 
-          backgroundColor: '#1a1b26', 
-          color: '#c0caf5', 
+          backgroundColor: '#ffffff', 
+          color: '#1f2937', 
           fontFamily: 'monospace' 
         }}>
           <div style={{ textAlign: 'center' }}>

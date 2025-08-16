@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +7,70 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/dark-theme.css">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
-    
+
     <style>
-        /* StartHere-specific styling */
+        /* Light theme variables */
+        :root {
+            --bg: #ffffff;
+            --bg-secondary: #f8fafc; /* slate-50 */
+            --surface: #f1f5f9; /* slate-100 */
+            --divider: #e5e7eb; /* gray-200 */
+            --border: #e5e7eb; /* gray-200 */
+            --text: #111827; /* gray-900 */
+            --text-primary: #1f2937; /* gray-800 */
+            --text-secondary: #4b5563; /* gray-600 */
+            --accent: #fb923c; /* orange-400 */
+            --accent-hover: #f59e0b; /* amber-500 */
+            /* Terminal (light) palette */
+            --terminal-bg: #ffffff;
+            --terminal-border: #e5e7eb;
+            --terminal-text: #1f2937;
+            --terminal-title: #6b7280;
+            --terminal-prompt: #6b7280;
+            --terminal-output: #374151;
+            --terminal-error: #b91c1c;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Page wrapper and background pattern overlay (concentric squares light pattern) */
+        .page-wrapper {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+
+        .pattern-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(75, 85, 99, 0.06) 5px, rgba(75, 85, 99, 0.06) 6px, transparent 6px, transparent 15px),
+                repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(75, 85, 99, 0.06) 5px, rgba(75, 85, 99, 0.06) 6px, transparent 6px, transparent 15px),
+                repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(107, 114, 128, 0.04) 10px, rgba(107, 114, 128, 0.04) 11px, transparent 11px, transparent 30px),
+                repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(107, 114, 128, 0.04) 10px, rgba(107, 114, 128, 0.04) 11px, transparent 11px, transparent 30px);
+        }
+
+        .content-root {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* StartHere-specific styling (adapted for light theme via CSS variables) */
         .hero-section {
             text-align: center;
             padding: 2rem 0;
@@ -24,51 +78,51 @@
             border-bottom: 1px solid var(--divider);
             background-color: var(--bg-secondary);
         }
-        
+
         .profile-picture {
             width: 96px;
             height: 96px;
             border-radius: 50%;
             border: 3px solid var(--accent);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             margin: 0 auto 1rem;
             display: block;
         }
-        
+
         .hero-title {
             font-size: 1.5rem;
             font-weight: 410;
             color: var(--text-primary);
             margin-bottom: 1rem;
         }
-        
+
         .hero-subtitle {
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
             font-size: 0.875rem;
             font-weight: 400;
         }
-        
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1rem;
             margin: 0.5rem 0;
         }
-        
+
         .social-links a {
             padding: 0.5rem;
             color: var(--text-secondary);
             transition: color 0.3s ease, transform 0.3s ease;
             border-radius: 8px;
         }
-        
+
         .social-links a:hover {
             color: var(--accent);
             background-color: var(--surface);
             transform: translateY(-2px);
         }
-        
+
         .navigation {
             display: flex;
             justify-content: center;
@@ -76,7 +130,7 @@
             margin: 1rem 0 0.5rem 0;
             font-size: 0.875rem;
         }
-        
+
         .nav-link {
             color: #fb923c;
             text-decoration: underline;
@@ -88,126 +142,126 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-        
+
         .nav-link:hover {
             color: #fbbf24;
             text-decoration-color: #fbbf24;
         }
-        
+
         .nav-separator {
             color: var(--text-secondary);
             font-weight: 400;
             display: flex;
             align-items: center;
         }
-        
+
         /* Terminal Styling */
         .terminal-section {
             max-width: 900px;
             margin: 1rem auto;
             padding: 0 1rem;
         }
-        
+
         .terminal {
-            background-color: #0a0a0a;
+            background-color: var(--terminal-bg);
             border-radius: 12px;
-            border: 1px solid #1a1a1a;
+            border: 1px solid var(--terminal-border);
             padding: 2rem;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
             font-family: 'Roboto Mono', monospace;
             font-size: 14px;
             cursor: text;
         }
-        
+
         .terminal-header {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 1rem;
             padding-bottom: 0.75rem;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--divider);
         }
-        
+
         .terminal-dots {
             display: flex;
             gap: 0.5rem;
         }
-        
+
         .terminal-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
         }
-        
+
         .terminal-dot.red { background-color: #ff5f56; }
         .terminal-dot.yellow { background-color: #ffbd2e; }
         .terminal-dot.green { background-color: #27ca3f; }
-        
+
         .terminal-title {
-            color: #666;
+            color: var(--terminal-title);
             font-size: 12px;
             margin-left: 0.5rem;
         }
-        
+
         .terminal-content {
-            color: #fff;
+            color: var(--terminal-text);
             line-height: 1.5;
         }
-        
+
         .terminal-line {
             margin: 0.25rem 0;
         }
-        
+
         .terminal-prompt {
-            color: #666;
+            color: var(--terminal-prompt);
         }
-        
+
         .terminal-prompt .user {
-            color: #27ca3f;
+            color: #16a34a;
         }
-        
+
         .terminal-prompt .dir {
-            color: #5af78e;
+            color: #059669;
         }
-        
+
         .terminal-command {
-            color: #fff;
+            color: var(--terminal-text);
         }
-        
+
         .terminal-output {
-            color: #ccc;
+            color: var(--terminal-output);
             padding-left: 1rem;
         }
-        
+
         .terminal-error {
-            color: #ff6b6b;
+            color: var(--terminal-error);
             padding-left: 1rem;
         }
-        
+
         .terminal-input-line {
             display: flex;
             align-items: center;
             gap: 0.25rem;
         }
-        
+
         .terminal-input {
             background: transparent;
             border: none;
             outline: none;
-            color: #fff;
+            color: var(--terminal-text);
             font-family: inherit;
             font-size: inherit;
             flex: 1;
-            caret-color: #fff;
+            caret-color: var(--terminal-text);
         }
-        
+
         .couchbase-highlight {
             color: #ff4444;
             font-weight: 600;
             position: relative;
             cursor: help;
         }
-        
+
         .couchbase-tooltip {
             position: absolute;
             bottom: 100%;
@@ -225,63 +279,63 @@
             margin-bottom: 0.5rem;
             border: 1px solid #444;
         }
-        
+
         .couchbase-highlight:hover .couchbase-tooltip {
             opacity: 1;
         }
-        
+
         .terminal-hints {
             margin-top: 1rem;
             margin-bottom: 1rem;
             text-align: center;
             space-y: 0.25rem;
         }
-        
+
         .terminal-hint {
             color: var(--text-secondary);
             font-size: 0.8rem;
             font-style: italic;
         }
-        
+
         .terminal-hint code {
             color: var(--accent);
             font-weight: 500;
         }
-        
+
         /* Timeline Styling */
         .timeline-section {
             margin: 4rem 0;
             padding: 0 2rem;
         }
-        
+
         .timeline-title {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 1rem;
             color: var(--text);
         }
-        
+
         .timeline-subtitle {
             text-align: center;
             color: var(--text-secondary);
             margin-bottom: 2rem;
             font-size: 0.9rem;
         }
-        
+
         .timeline-subtitle .proof-of-work {
             color: var(--accent);
             font-family: 'Roboto Mono', monospace;
             font-weight: 600;
             font-style: italic;
         }
-        
+
         .timeline-item {
             margin: 2rem 0;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .timeline-year {
             font-size: 1.25rem;
             color: var(--accent);
@@ -289,30 +343,30 @@
             margin-bottom: 1rem;
             font-family: 'Roboto Mono', monospace;
         }
-        
+
         .timeline-content {
             margin-left: 1rem;
             font-size: 0.9rem;
             color: var(--text-primary);
         }
-        
+
         .timeline-content .achievement-list {
             margin: 0;
             padding-left: 1.5rem;
             list-style-type: disc;
         }
-        
+
         .timeline-content .achievement-list li {
             margin: 0.5rem 0;
             line-height: 1.6;
             color: var(--text-primary);
         }
-        
+
         .timeline-content p {
             margin: 0.5rem 0;
             line-height: 1.6;
         }
-        
+
         .timeline-content a {
             color: var(--accent);
             text-decoration: underline;
@@ -320,17 +374,17 @@
             text-underline-offset: 2px;
             transition: color 0.3s ease;
         }
-        
+
         .timeline-content a:hover {
             color: var(--accent-hover);
         }
-        
+
         .timeline-content .external-link {
             display: inline-flex;
             align-items: center;
             gap: 0.25rem;
         }
-        
+
         /* Call-to-Action Section */
         .cta-section {
             text-align: center;
@@ -341,19 +395,19 @@
             border: 1px solid var(--border);
             max-width: 800px;
         }
-        
+
         .cta-title {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
             color: var(--text);
         }
-        
+
         .cta-subtitle {
             color: var(--text-secondary);
             margin-bottom: 1rem;
             font-size: 0.9rem;
         }
-        
+
         .cta-button {
             display: inline-flex;
             align-items: center;
@@ -366,32 +420,32 @@
             font-weight: 500;
             font-size: 0.9rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .cta-button:hover {
             background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         /* Footer */
         .footer {
             margin-top: 4rem;
             padding: 2rem 2rem 3rem;
             border-top: 2px solid transparent;
             background: linear-gradient(var(--surface), var(--surface)) padding-box,
-                        linear-gradient(90deg, 
-                            transparent 0%, 
-                            #7aa2f7 20%, 
-                            #bb9af7 40%, 
-                            #7aa2f7 60%, 
+                        linear-gradient(90deg,
+                            transparent 0%,
+                            #7aa2f7 20%,
+                            #bb9af7 40%,
+                            #7aa2f7 60%,
                             transparent 100%) border-box;
             background-size: 100% 100%, 300% 100%;
             animation: movingLine 3s linear infinite;
             text-align: center;
         }
-        
+
         @keyframes movingLine {
             0% {
                 background-position: 0% 0%, -300% 0%;
@@ -400,7 +454,7 @@
                 background-position: 0% 0%, 300% 0%;
             }
         }
-        
+
         .footer-content {
             display: flex;
             align-items: center;
@@ -409,63 +463,63 @@
             flex-wrap: wrap;
             margin-bottom: 1rem;
         }
-        
+
         .footer-content p {
             margin: 0;
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
         .footer-content a {
             color: var(--accent);
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        
+
         .footer-content a:hover {
             color: var(--accent-hover);
             text-decoration: underline;
         }
-        
+
         .footer-socials {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-        
+
         .footer-socials a {
             padding: 0.5rem;
             color: var(--text-secondary);
             transition: color 0.3s ease;
             border-radius: 6px;
         }
-        
+
         .footer-socials a:hover {
             color: var(--accent);
             background-color: var(--surface);
         }
-        
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 1.5rem;
             }
-            
+
             .navigation {
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
             }
-            
+
             .social-links {
                 gap: 0.75rem;
             }
-            
+
             .terminal {
                 font-size: 12px;
                 padding: 1rem;
             }
-            
+
             .footer-content {
                 flex-direction: column;
                 gap: 1rem;
@@ -474,504 +528,17 @@
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero-section">
-        <img src="/assets/images/profile-picture.jpeg" alt="Profile Picture" class="profile-picture">
-        <h1 class="hero-title">Hey, I'm Soham! 👋</h1>
-        <p class="hero-subtitle">Welcome to my corner of the internet. Here's a little about my journey so far.</p>
-        
-        <!-- Social Links -->
-        <div class="social-links">
-            <a href="https://github.com/sohoxic" target="_blank" title="GitHub">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                </svg>
-            </a>
-            <a href="https://twitter.com/sohoxic_" target="_blank" title="Twitter">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/sarkar-soham/" target="_blank" title="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                    <rect x="2" y="9" width="4" height="12"/>
-                    <circle cx="4" cy="4" r="2"/>
-                </svg>
-            </a>
-        </div>
-        
-        <!-- Navigation -->
-        <nav class="navigation">
-            <a href="/thesohoxictales/" class="nav-link">blog ↗</a>
-            <span class="nav-separator">-</span>
-            <a href="#timeline" class="nav-link">proof-of-work ↗</a>
-        </nav>
-    </header>
-        
-        <!-- Interactive Terminal Section -->
-        <section class="terminal-section">
-            <div class="terminal" id="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-dots">
-                        <div class="terminal-dot red"></div>
-                        <div class="terminal-dot yellow"></div>
-                        <div class="terminal-dot green"></div>
-                    </div>
-                    <div class="terminal-title">terminal</div>
-                </div>
-                
-                <div class="terminal-content">
-                    <div id="terminal-history">
-                        <div class="terminal-line">
-                            <span class="terminal-prompt">
-                                <span class="user">soham@dev</span>:<span class="dir">~</span>$
-                            </span>
-                            <span class="terminal-command">whoami</span>
-                        </div>
-                        <div class="terminal-line terminal-output">
-                            soham - CS graduate passionate about AI, systems programming, and building things that matter.
-                        </div>
-                        <div class="terminal-line terminal-output">
-                            Currently working at <span class="couchbase-highlight">Couchbase<span class="couchbase-tooltip">COUCH = Clusters Of Unreliable Commodity Hardware</span></span>, a distributed database company.
-                        </div>
-                    </div>
-                    
-                    <div class="terminal-input-line">
-                        <span class="terminal-prompt">
-                            <span class="user">soham@dev</span>:<span class="dir">~</span>$
-                        </span>
-                        <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="terminal-hints">
-                <div class="terminal-hint">
-                    💡 Try terminal commands like <code>"cd blog"</code>, <code>"ls"</code>, <code>"help"</code>, <code>"pwd"</code>, <code>"whoami"</code>, <code>"clear"</code>
-                </div>
-                <div class="terminal-hint">
-                    ✨ Hover over <span class="couchbase-highlight">Couchbase</span> in the terminal above to see what COUCH stands for!
-                </div>
-            </div>
-        </section>
-        
-        <!-- Timeline Section -->
-        <main class="timeline-section" id="timeline">
-            <h2 class="timeline-title">What I've Been Up To</h2>
-            <p class="timeline-subtitle">
-                A quick rundown of the stuff I've done over the years - my <span class="proof-of-work">proof of work!</span>
-            </p>
-            
-            <div class="timeline-items">
-                
-                <div class="timeline-item">
-                    <h3 class="timeline-year">2025</h3>
-                    <div class="timeline-content">
-                        <ul class="achievement-list">
-                        
-                        
-                        <li>Writing another paper at work too along with working on some very interesting features in N1QL query.</li>
-                        
-                        
-                        
-                        <li>Wrote a journal on Chaos Theory with Manoj and Shruti(publication in progress) under <a href="https://scholar.google.com/citations?user=2satV70AAAAJ&hl=en" class="external-link"> Sudeepa ma'am <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
-                        
-                        
-                        
-                        <li>Consciously crunched all the time I had to revamp my website entirely, took initiative at work to document a "GETTING STARTED WITH QUERY" confluence page in order to help any newcomers joining to the query team because I faced challenges and felt the need for an extentive documentation.</li>
-                        
-                        
-                        
-                        <li>I made my first contribution to the Distributed Query team, spent almost 13-14 hours a day for a week trying to read/learn everything about the Distributed query engine, revisiting concepts from Automata and getting used to Golang and our codebase, doing anything everything to make it happen.</li>
-                        
-                        
-                        
-                        <li>I moved to the distributed QUERY team(Couchbase Core) at Couchbase. I was finally living the dream of almost every engineer interested in Systems, working on the query engine at a Database Company! I made it here, the feeling is surreal.</li>
-                        
-                        
-                        
-                        <li>Trying to give back to the community by mentoring juniors, reviewing resumes as placement season started. Last year around this time, I really felt the need for such mentorship but I couldn't find much help and paved my way on my own, that's when I decided to mentor as many as possible during their placement seasons.</li>
-                        
-                        
-                        
-                        <li>Presented my Capstone paper "Smart Agriculture and Next-Gen Sustainability: Harnessing Big Data and Machine Learning for Carbon Sequestration Prediction with Blockchain-Powered Carbon Credit Trading" at <a href="https://ict4sd.org/" class="external-link"> ICT4SD<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
-                        
-                        
-                        
-                        <li>Awarded the <a href="https://drive.google.com/drive/u/0/folders/1oGZbwGbcurJIsEOc68cK-Tdrc3QeShaX" class="external-link"> Immense contribution to the Department, B.Tech 2021-2025 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. Collecting this award from <a href="https://scholar.google.com/citations?user=q-f3CEoAAAAJ&hl=en" class="external-link"> Arti ma'am <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> was one of the best things that happened in college. She has been my mentor and she's just amazing.</li>
-                        
-                        
-                        
-                        <li>Invited as a <a href="https://drive.google.com/drive/u/0/folders/1Hlu3Dw7yUoZKJ_rDWOQMaYmgj58NmmSM" class="external-link"> REVIEWER <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> for the International Conference on Computational Complexity and Intelligent Algorithms (IC3IA2025).</li>
-                        
-                        
-                        
-                        <li>Won Top 20 Best <a href="https://drive.google.com/drive/u/0/folders/1LPf6gjDi4FOy-llIJIPneWLso1DYUpkI" class="external-link"> Capstone team <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
-                        
-                        
-                        
-                        <li>Once the AI side of things were built, I got to work on the Control Plane of the database in order to integrate our project with the db. The coolest part was probably doind the build of the couchbase locally. I was actually building/working on the concepts which I used to be extremely interested in my Database and Big Data classes.</li>
-                        
-                        
-                        
-                        <li>I worked on building a multi-agent system and 1 particular AI Service(can't talk much about it until GA) under  <a href="https://www.linkedin.com/in/santosh-hegde-cb/" class="external-link"> Santosh Hedge<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
-                        
-                        
-                        
-                        <li>Started my journey into corporate on Jan 6th, 2025. I joined the AI Team at <a href="https://www.couchbase.com/" class="external-link"> Couchbase<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, a distributed no-SQL database company built for high performance/heavy workloads including AI workloads.</li>
-                        
-                        
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="timeline-year">2024</h3>
-                    <div class="timeline-content">
-                        <ul class="achievement-list">
-                        
-                        
-                        <li>Finally hit the 10 GPA mark in 7th sem (was so close in my 2nd sem too but missed by 0.14).</li>
-                        
-                        
-                        
-                        <li>Got an opportunity to be the Teaching Assistant for Big Data(Dist Sys) for the 3rd year students at PES University. This was a extremely skewed role and making it here was one of the most amazing feeling! (My Unfair advantage - Assignments and projects are extremely tough but I was one of the few in campus to solve everything without ever being plagiarised.)</li>
-                        
-                        
-                        
-                        <li>02.08.2024 - Placed at Couchbase, a distributed no-SQL database company. This was everything I wanted, the only company I targetted to get in for more than a year, to explore systems specially distributed systems and the best thing that could happen was me working in a distributed database company. For any core systems guy, this is the dream place to be and to be very honest I couldn't imagine after I made it to the final round. Hands shivering, couldn't talk. The next morning I woke up not believing myself that I was placed.</li>
-                        
-                        
-                        
-                        <li>Got a <a href="https://drive.google.com/drive/u/0/folders/1z3w2MxLoaX_d91rVqDP0FRcpvucg83hk" class="external-link"> Summer Research Internship <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> at Indian Institute of Science (IISc) under <a href="https://mgmt.iisc.ac.in/shashi-jain/" class="external-link"> Dr. Shashi Jain <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> to work on Project Saathi: Empowering Rural Finance with Equitable Artificial Intelligence (AI), funded by the Gates Foundation. If somebody told the 19 year old me visiting IISC campus for the first time that I'd somebody get the opportunity to do research here, I wouldn't believe them. Dreams do come true!</li>
-                        
-                        
-                        
-                        <li>During summer, worked on a research paper "Identifying Critical Nodes in Complex Networks: A Study of Iterative Algorithms with 6LoWPAN RPL-powered Cooja" taking up a special course on Contiki OS and presented it at ICTCS in December 2024.</li>
-                        
-                        
-                        
-                        <li>Presented my second paper "Advancing Cricket Narratives: AI-Enhanced Advanced Journaling in the IPL Using Language Models" at  IEEE CONECCT, Indian Institute of Science (IISc) Bangalore along with <a href="https://saiyashwanth.tech/" class="external-link"> Sai Yashwanth <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
-                        
-                        
-                        
-                        <li>Presented the paper "Advancing Urban Evacuation Management: A Real-Time, Adaptive Model Leveraging Cloud-Enabled Big Data and IoT Surveillance" at  IEEE CONIT, 2024, along with <a href="https://sarthakskumar.com/" class="external-link"> Sarthak S Kumar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and guided by <a href="https://scholar.google.com/citations?user=7q3inAcAAAAJ&hl=en" class="external-link"> Animesh <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> sir.</li>
-                        
-                        
-                        
-                        <li>CRC Taylor & Francis Book Chapter on <a href="https://books.google.co.za/books?hl=en&lr=&id=C7M1EQAAQBAJ&oi=fnd&pg=PA169&ots=ebikooUVmS&sig=8zlLNO7jjHDZ4h5z2A_4iys2UT4&redir_esc=y#v=onepage&q&f=false" class="external-link"> 2D Nanomaterials for removal of gaseous air contaminants <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> finally came out.</li>
-                        
-                        
-                        
-                        <li>Life came full circle when I got an invited as a mentor for Ingenious, the flagship hackathon of PES university.</li>
-                        
-                        
-                        
-                        <li>Finally went for the long-awaited hostel boys trek to skandagiri, with our hostel being so strict we could manage to rent a few cars at mid-night and drive till the base of skandagiri, and though I was really tired mid-way and felt like giving up on the trek but my friends, they just pushed me to make it to the top and scream at the top of our voices, take shirtless pictures at the hill top.</li>
-                        
-                        
-                        
-                        <li><a href="https://github.com/Sohoxic/EtcdKVStore" class="external-link"> Built a key-value store <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> using etcd for Cloud project.</li>
-                        
-                        
-                        
-                        <li>Built my portfolio website and set up the .com domain for it.</li>
-                        
-                        
-                        
-                        <li>Implemented a <a href="https://github.com/Sohoxic/GFS-git-from-scratch" class="external-link"> Version Control System <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> from scratch with features including repository setup, commits, and pushes to GitHub and had a really cool learning experience about Git internals (blobs, trees, commits etc.). </li>
-                        
-                        
-                        
-                        <li>Assisted Juniors(2nd years) during Computer Networks lab under <a href="https://scholar.google.com/citations?user=7q3inAcAAAAJ&hl=en" class="external-link"> Animesh <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> sir.</li>
-                        
-                        
-                        
-                        <li>Started ideating for our capstone and the idea that resonated with my previous research works in chemistry was tackling with the amount of carbon dioxide content in the atmosphere and reducing the atmospheric pollution which leads towards a more greener and safer environment for people to live and breath in. <a href="https://www.canva.com/design/DAF_BuQnMi0/dcFTAOK9_mSfTI6RtXezMQ/edit?utm_content=DAF_BuQnMi0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="external-link"> Our idea <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> was to use machine learning and blockchain to enhance carbon sequestration and enable transparent carbon credit trading between farmers and industrialists for a sustainable, economically viable future.</li>
-                        
-                        
-                        
-                        <li>Started my year working on a research topic "Advancing Cricket Narratives: AI-Enhanced Advanced Journaling in the IPL Using Language Models" along with <a href="https://saiyashwanth.tech/" class="external-link"> Sai Yashwanth <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a></li>
-                        
-                        
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="timeline-year">2023</h3>
-                    <div class="timeline-content">
-                        <ul class="achievement-list">
-                        
-                        
-                        <li>Built my <a href="https://drive.google.com/drive/u/0/folders/1LPf6gjDi4FOy-llIJIPneWLso1DYUpkI" class="external-link"> Capstone team <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> with Aditya Poddar, Ananya Hegde and Shravya Reddy. We were really determined to work under Animesh sir, and it's not easy getting him as the guide for Capstone because almost the entire college would want to work under him. We had proved ourselves to be worth taking the risk and having us under him.</li>
-                        
-                        
-                        
-                        <li>Built and shipped my <a href="https://www.npmjs.com/package/use-formflow" class="external-link"> first npm package(use-formflow) <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> from scratch during my week-ends. It is a custom hook that provides an abstraction for managing form states, validation, and submissions. It simplifies the process of handling form inputs and reduces boilerplate for developers.</li>
-                        
-                        
-                        
-                        <li>Was really inspired by Harkirat, joined his <a href="https://100xdevs.com/" class="external-link"> cohort <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and that's one of the best investments I've done till date. Learnt everything about the web, how the internet works, docker, deploying applications etc. Learnt about Design Patterns and implemented that while I built <a href="https://github.com/Sohoxic/One-Stop-Shop" class="external-link"> One-Stop-Shop <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, a full-stack application .</li>
-                        
-                        
-                        
-                        <li>Joined the Operations team as the Lead for Maaya, our cultural fest but soon dropped out due to clash of timings and events with Shunya and my integrity did not allow me to just hold a position without working hard for it, I still kept supporting the team from the backend.</li>
-                        
-                        
-                        
-                        <li>Got started with solving <a href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/" class="external-link"> Striver's A2Z sheet <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> for DSA.</li>
-                        
-                        
-                        
-                        <li>Our presentation left such an impact that the college's principal requested me to give a talk to the 3rd and 4th-year students. I was more than happy to share my insights on opensource, and in-depth about version control systems, and also provide guidance on building a strong LinkedIn profile and networking with professionals worldwide.</li>
-                        
-                        
-                        
-                        <li>Presented my paper entitled <a href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/" class="external-link"> Enhancing Electromagnetic Compatibility with Polyaniline using MnO2 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> National Conference On Recent Trends in Smart Materials (NCRTSM) at King's College, Tamil Nadu.  What made this experience even more special is that I was the only undergraduate student presenting amongst a group of accomplished PhD students.</li>
-                        
-                        
-                        
-                        <li>Won a fun pitch-your-idea challenge at an <a href="https://www.linkedin.com/posts/sarkar-soham_talktomeabout-speednetworking-group-activity-7103623782728105985-9INM?utm_source=share&utm_medium=member_desktop&rcm=ACoAADecRt4BzWqZFw-pNrYYgZ7VoI0NBujCCH8" class="external-link"> an invite-only meetup <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> organized by Bluelearn, an edtech and social learning startup valued at ₹86.4 Cr. I got to meet a lot of high-agency people, including Bluelearn’s founders, Harish and Shreyans!.</li>
-                        
-                        
-                        
-                        <li><a href="https://drive.google.com/drive/u/0/folders/1J1Ya5J6SM9qSk6TajV9Q5vN9uygGHemb" class="external-link"> Visited the data center <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> at NetApp's Hoody campus in Bangalore. When I was learning about databases, I was really fascinated to once visit a data centers. Uff this was such an experience.</li>
-                        
-                        
-                        
-                        <li>Got a chance to attend <a href="https://drive.google.com/drive/u/0/folders/11qupJNo0LyT4P7KVYRzWPL2sRNvh8OZf" class="external-link"> the MITC Engineering Confluence 2023 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, where I had the privilege of visiting Moog Aircraft, a globally renowned company specializing in precision control components and systems.</li>
-                        
-                        
-                        
-                        <li>Got appointed as the Head of Shunya ECC based on my leadership skills, which include taking ownership of work, giving people due diligence, being reliable and also based on my performance in the team(from being an unknown club to being one of the most popular clubs on EC campus, what started from a 5-7 member team had grown to over a hundred member team).</li>
-                        
-                        
-                        
-                        <li>Got really interested in Big Data and soon started working on the paper "Advancing Urban Evacuation Management: A Real-Time, Adaptive Model Leveraging Cloud-Enabled Big Data and IoT Surveillance" along with <a href="https://sarthakskumar.com/" class="external-link"> Sarthak S Kumar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> under <a href="https://scholar.google.com/citations?user=7q3inAcAAAAJ&hl=en" class="external-link"> Animesh <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> sir.</li>
-                        
-                        
-                        
-                        <li>Since I was into research, I did my Summer Research Internship at <a href="https://www.linkedin.com/company/starc-pesu/posts/?feedView=all" class="external-link"> Sports Technology And Analytics Research Centre(STARC) <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, Bengaluru and worked on building Machine Learning models to analyse characteristics of ice hockey players and teams through the use of statistics and machine learning tools to understand the effects on their performance. I was exploring the field of Machine Learning too, trying my hands on anything everything and seeing that interests me the most.</li>
-                        
-                        
-                        
-                        <li>Secured <a href="https://www.linkedin.com/posts/sarkar-soham_greetings-everyone-i-am-thrilled-to-share-activity-7058738681615958016-MlEX?utm_source=share&utm_medium=member_desktop&rcm=ACoAADecRt4BzWqZFw-pNrYYgZ7VoI0NBujCCH8" class="external-link"> the 3rd position <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> in the flagship hackathon, Ingenious, organized by PES University, EC Campus. Finally getting the long awaited win. In 2021, we were in top 10 and won the most unique project award in our first year but could not make it to the top 3  and was really disheartened but we kept working and chasing our goal and here we were in 2023, winning the podium. I was really proud of myself.</li>
-                        
-                        
-                        
-                        <li>I again got really interested in Web Dev and soon started with  <a href="https://www.theodinproject.com/" class="external-link"> the Odin Project <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. </li>
-                        
-                        
-                        
-                        <li>Almost after an year's effort, my first book chapter <a href="https://books.google.co.za/books?hl=en&lr=&id=C7M1EQAAQBAJ&oi=fnd&pg=PA169&ots=ebikooUVmS&sig=8zlLNO7jjHDZ4h5z2A_4iys2UT4&redir_esc=y#v=onepage&q&f=false" class="external-link"> 2D Nanomaterials for removal of gaseous air contaminants <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> got accepted in the reputed TAYLOR AND FRANCIS.</li>
-                        
-                        
-                        
-                        <li>Worked on our second startup, <a href="https://iotforhire.vercel.app/" class="external-link"> IoTforHire <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, where I led the complete tech execution—from choosing the right architecture and building the core system as the CTO. IoTforHire provided reliable IoT components to college students for rent with the convenience of on campus one-day delivery. We serviced 58 orders in just the first 10 days.</li>
-                        
-                        
-                        
-                        <li>Interviewed and got selected as Head of Sponsorship for IEEE RAS(Robotics and Automation Society)</li>
-                        
-                        
-                        
-                        <li>Organised my first event from Shunya as the Logistics Head - <a href="https://drive.google.com/drive/folders/1rkOnMjpgRDvw_yGfsZKQ9UEcBpctV7vX" class="external-link"> Qubitrix <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>(10-hour ideathon), the flagship event.</li>
-                        
-                        
-                        
-                        <li>Got promoted as the Head of Logistics in Shunya. I worked with the club heads to prepare the budget and ensure all logistical arrangements for the event.</li>
-                        
-                        
-                        
-                        <li>Soon after I joined Codechef, I became part of the organizing team for a 2-hour coding challenge, where I helped plan and ensure smooth execution for all participants.</li>
-                        
-                        
-                        
-                        <li>Joined Codechef PESU ECC as the Technical Core Team lead to provide guidance and support to a team of tech enthusiasts in building and maintaining a website for a club.</li>
-                        
-                        
-                        
-                        <li>Organized an <a href="https://drive.google.com/drive/folders/1ih3GbMe3kx5goDi80I3AYcxs7zpYPeBy" class="external-link"> Outreach <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> program to visit a government-aided school Adopted under PES University in Bangalore to teach mathematics in a fun and interactive way. This was one of the best time I had during college.</li>
-                        
-                        
-                        
-                        <li>I was always interested in OS and the moment I learnt about kernels, I came back home from college and built <a href="https://github.com/Sohoxic/LinEx" class="external-link"> A simple Linux Kernel Module <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> that lists all the currently running processes in the system and their corresponding states (2024: I am glad to know a lot of peers and later juniors found this repository helpful).</li>
-                        
-                        
-                        
-                        <li>Learnt about Computer Networks and implemented from scratch <a href="https://github.com/Sohoxic/Connectify" class="external-link"> A File Transfer Protocol (FTP) system <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> for file transfer between multiple clients and the server over a network.</li>
-                        
-                        
-                        
-                        <li>Started <a href="hhttps://www.linkedin.com/in/sarkar-soham/details/experience/1635530246610/single-media-viewer/?profileId=ACoAADecRt4BzWqZFw-pNrYYgZ7VoI0NBujCCH8" class="external-link"> internship in Marketing <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>  at My Captain, NSRCEL- IIM Bangalore Incubated Company</li>
-                        
-                        
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="timeline-year">2022</h3>
-                    <div class="timeline-content">
-                        <ul class="achievement-list">
-                        
-                        
-                        <li>I was introduced to Automata Formal Languages and Logic, learnt all about NFA, DFA, Regular grammer, Context Free grammer, and most importantly about Turing Machines and it excited me like nothing else before. This ignited in me the passion and love for systems. Scored 100/100 scaled down to 50/50 in mid terms and later got a perfect 10 pointer in AFLL.</li>
-                        
-                        
-                        
-                        <li>I started diving deep into JS frameworks - REACT, NODE, EXPRESS and built my own video streaming platform- <a href="https://playris.netlify.app/" class="external-link"> Playris <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
-                        
-                        
-                        
-                        <li>Started learning everything about <a href="https://www.geeksforgeeks.org/courses/cpp-programming-basic-to-advanced" class="external-link"> Data Structures <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>(not problem solving but knowing core data structures, any every data structure that was there) in cpp in details.</li>
-                        
-                        
-                        
-                        <li>Tried my hands in competitive programming inspired by <a href="https://www.linkedin.com/in/yuvraj-sakshith-5005a421b/?originalSubdomain=in" class="external-link"> Yuvraj <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. It really gave the adrenaline rush but didn't continue for long because I was more interested in building something.</li>
-                        
-                        
-                        
-                        <li> Started learning <a href="hhttps://github.com/Sohoxic/DSA-in-C" class="external-link"> Data Structures in C, <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>  although people hated C but I enjoyed writing code in C more than writing in python because Linux Kernel was written in C and I used to fancy Linux very much(I still do) plus the level of memory manipulation you can do in C, you can't do it to that extent in any other high level languages like python.</li>
-                        
-                        
-                        
-                        <li>Volunteered as mentor for my first event in Shunya, Anveshana, an ideathon where I mentored government school students.</li>
-                        
-                        
-                        
-                        <li>I really loved Mathematics and I joined "Shunya", a mathematics and research oriented club.</li>
-                        
-                        
-                        
-                        <li>Made my first proper contribution to <a href="https://hacktoberfest.com/" class="external-link"> Hacktoberfest <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. I contributed to projects in IOT and Web Dev.</li>
-                        
-                        
-                        
-                        <li>Lost all my contributions in github when I tried adding a new email and removing my primary email(big blunder). Soon created my new account with my personal email id.</li>
-                        
-                        
-                        
-                        <li>I joined my first ever club "HackerSpace", a student-run developer community with an Open-Source wing at the start of my 3rd semester. <a href="https://" class="external-link"> Interesting Story on how I joined <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
-                        
-                        
-                        
-                        <li>I visited IISC Bangalore for a <a href="https://drive.google.com/drive/folders/1rv5KzT-Jlc0Z-7G1itMC_mObkf_yv0NL" class="external-link"> Machine Learning workshop <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and it was a dream come true moment. Also on the very same day, I was asked to attend my Junior batch's orientation where I would be honoured by our Chancellor, Dr M.R Doreswamy on being in the <a href="https://INSERTTHEAWARD" class="external-link"> Top 3 Student <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> academically but unfortunately I had to miss this. I sometimes regret but back then being in IISC was the dream.</li>
-                        
-                        
-                        
-                        <li>I scored a SGPA of 9.86 in Sem 2 which went in a breeze. The most fun part about sem 2 was learning C.</li>
-                        
-                        
-                        
-                        <li>I started writing my first ever paper in Chemistry "Radiation Pollution and it's impacts on living creatures in and around Bangalore" and much later presented it(<a href="https://drive.google.com/drive/folders/1h_C3xpq5LB-G_FRKeCiBYhGBhRIN50OO" class="external-link"> Link <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>).</li>
-                        
-                        
-                        
-                        <li>Learnt C in depth from<a href="https://ieeexplore.ieee.org/author/37089811856" class="external-link"> Sreenath sir <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and he was an wonderful professor. I focused much on writing code and understanding the jargons.</li>
-                        
-                        
-                        
-                        <li>Sem 1 ended on a good note. Scored a 9.41 GPA with Grade 10 in Engineering Physics and Engineering Electrical.</li>
-                        
-                        
-                        
-                        <li>Spent time learning basic HTML, CSS. I really loved learning C, picked up the "The C Programming Language" by Dennis Ritchie, the creator of C language. C Notes(will insert my notes here.)</li>
-                        
-                        
-                        
-                        <li>I started learning more about git, github (will insert my notes here).</li>
-                        
-                        
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="timeline-year">2021</h3>
-                    <div class="timeline-content">
-                        <ul class="achievement-list">
-                        
-                        
-                        <li>Participated in my second hackathon Ingenious with participants across South India and made it to top 10(the youngest team to make it) and got mentioned as the "Most Unique Project" (<a href="https://drive.google.com/drive/u/0/folders/1qCDTuwdt3MP__d0Nt4OsVNQpZnH-AWoV" class="external-link"> Check out! <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>). This was a win for us and the mentors really boosted us to work on our idea.</li>
-                        
-                        
-                        
-                        <li>Participated in my first ever hackathon. Unfortunately did not make it to the podiums (<a href="https://drive.google.com/drive/u/0/folders/1_qrhJKc2HMUAmH1PdU0KIoYj60bsT0_C" class="external-link"> Check out! <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>).</li>
-                        
-                        
-                        
-                        <li>Got introduced to Open Source during <a href="https://hacktoberfest.com/" class="external-link"> Hacktoberfest <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> by none other than <a href="https://rowjee.com" class="external-link"> Anirudh Rowjee <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. Life changed here onwards!</li>
-                        
-                        
-                        
-                        <li>Started exploring the field of research inspired by Mohana Lakshmi ma'am, read literature in quantum physics but couldn't continue unfortunately.</li>
-                        
-                        
-                        
-                        <li>Started learning python(built a basic phonebook), got really interested in Quantum physics (Thanks to <a href="https://staff.pes.edu/nm1396/" class="external-link">Dr. Mohana Lakshmi<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>).</li>
-                        
-                        
-                        
-                        <li>Learnt about different operating system and I was fascinated by Linux so I installed Linux(PopOS) into my system as soon as I bought my new laptop. It was so much fun using the terminal to do most of the stuff.</li>
-                        
-                        
-                        
-                        <li><a href="/journey.html" class="external-link">Started my Bachelor's in Computer Science and moved to Bengaluru <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> (the best decision of my life, thanks to BABA.)</li>
-                        
-                        
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="timeline-year">2020</h3>
-                    <div class="timeline-content">
-                        <ul class="achievement-list">
-                        
-                        
-                        <li>Class 12 (Higher Secondary) - Science stream (Physics, Chemistry, Mathematics) - 94%</li>
-                        
-                        
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <h3 class="timeline-year">2018</h3>
-                    <div class="timeline-content">
-                        <ul class="achievement-list">
-                        
-                        
-                        <li>Class 10 (Matriculation) - Core subjects including Science and Mathematics - 95%</li>
-                        
-                        
-                        </ul>
-                    </div>
-                </div>
-                
-            </div>
-        </main>
-        
-        <!-- Call-to-Action Section -->
-        <section class="cta-section">
-            <h3 class="cta-title">Ready to dive deeper?</h3>
-            <p class="cta-subtitle">Explore my thoughts on AI, systems, research, and everything in between.</p>
-            <a href="/thesohoxictales/" class="cta-button">
-                Read My Blog
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </section>
-        
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <p>&copy; 2025 <a href="https://sarkarsoham.com">Soham Sarkar</a> | Built with ❤️ by <a href="https://github.com/Sohoxic/toxic">toxic!</a> 🧪</p>
-                <div class="footer-socials">
+    <div class="page-wrapper">
+        <div class="pattern-overlay"></div>
+        <div class="content-root">
+            <!-- Hero Section -->
+            <header class="hero-section">
+                <img src="/assets/images/profile-picture.jpeg" alt="Profile Picture" class="profile-picture">
+                <h1 class="hero-title">Hey, I'm Soham! 👋</h1>
+                <p class="hero-subtitle">Welcome to my corner of the internet. Here's a little about my journey so far.</p>
+
+                <!-- Social Links -->
+                <div class="social-links">
                     <a href="https://github.com/sohoxic" target="_blank" title="GitHub">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
@@ -990,26 +557,518 @@
                         </svg>
                     </a>
                 </div>
-            </div>
-        </footer>
-    
+
+                <!-- Navigation -->
+                <nav class="navigation">
+                    <a href="/thesohoxictales/" class="nav-link">blog ↗</a>
+                    <span class="nav-separator">-</span>
+                    <a href="#timeline" class="nav-link">proof-of-work ↗</a>
+                </nav>
+            </header>
+
+            <!-- Interactive Terminal Section -->
+            <section class="terminal-section">
+                <div class="terminal" id="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">terminal</div>
+                    </div>
+
+                    <div class="terminal-content">
+                        <div id="terminal-history">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">
+                                    <span class="user">soham@dev</span>:<span class="dir">~</span>$
+                                </span>
+                                <span class="terminal-command">whoami</span>
+                            </div>
+                            <div class="terminal-line terminal-output">
+                                soham - CS graduate passionate about AI, systems programming, and building things that matter.
+                            </div>
+                            <div class="terminal-line terminal-output">
+                                Currently working at <span class="couchbase-highlight">Couchbase<span class="couchbase-tooltip">COUCH = Clusters Of Unreliable Commodity Hardware</span></span>, a distributed database company.
+                            </div>
+                        </div>
+
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt">
+                                <span class="user">soham@dev</span>:<span class="dir">~</span>$
+                            </span>
+                            <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terminal-hints">
+                    <div class="terminal-hint">
+                        💡 Try terminal commands like <code>"cd blog"</code>, <code>"ls"</code>, <code>"help"</code>, <code>"pwd"</code>, <code>"whoami"</code>, <code>"clear"</code>
+                    </div>
+                    <div class="terminal-hint">
+                        ✨ Hover over <span class="couchbase-highlight">Couchbase</span> in the terminal above to see what COUCH stands for!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Section -->
+            <main class="timeline-section" id="timeline">
+                <h2 class="timeline-title">What I've Been Up To</h2>
+                <p class="timeline-subtitle">
+                    A quick rundown of the stuff I've done over the years - my <span class="proof-of-work">proof of work!</span>
+                </p>
+
+                <div class="timeline-items">
+                    
+                    <div class="timeline-item">
+                        <h3 class="timeline-year">2025</h3>
+                        <div class="timeline-content">
+                            <ul class="achievement-list">
+                            
+                            
+                            <li>Writing another paper at work too along with working on some very interesting features in N1QL query.</li>
+                            
+                            
+                            
+                            <li>Wrote a journal on Chaos Theory with Manoj and Shruti(publication in progress) under <a href="https://scholar.google.com/citations?user=2satV70AAAAJ&hl=en" class="external-link"> Sudeepa ma'am <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
+                            
+                            
+                            
+                            <li>Consciously crunched all the time I had to revamp my website entirely, took initiative at work to document a "GETTING STARTED WITH QUERY" confluence page in order to help any newcomers joining to the query team because I faced challenges and felt the need for an extentive documentation.</li>
+                            
+                            
+                            
+                            <li>I made my first contribution to the Distributed Query team, spent almost 13-14 hours a day for a week trying to read/learn everything about the Distributed query engine, revisiting concepts from Automata and getting used to Golang and our codebase, doing anything everything to make it happen.</li>
+                            
+                            
+                            
+                            <li>I moved to the distributed QUERY team(Couchbase Core) at Couchbase. I was finally living the dream of almost every engineer interested in Systems, working on the query engine at a Database Company! I made it here, the feeling is surreal.</li>
+                            
+                            
+                            
+                            <li>Trying to give back to the community by mentoring juniors, reviewing resumes as placement season started. Last year around this time, I really felt the need for such mentorship but I couldn't find much help and paved my way on my own, that's when I decided to mentor as many as possible during their placement seasons.</li>
+                            
+                            
+                            
+                            <li>Presented my Capstone paper "Smart Agriculture and Next-Gen Sustainability: Harnessing Big Data and Machine Learning for Carbon Sequestration Prediction with Blockchain-Powered Carbon Credit Trading" at <a href="https://ict4sd.org/" class="external-link"> ICT4SD<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
+                            
+                            
+                            
+                            <li>Awarded the <a href="https://drive.google.com/drive/u/0/folders/1oGZbwGbcurJIsEOc68cK-Tdrc3QeShaX" class="external-link"> Immense contribution to the Department, B.Tech 2021-2025 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. Collecting this award from <a href="https://scholar.google.com/citations?user=q-f3CEoAAAAJ&hl=en" class="external-link"> Arti ma'am <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> was one of the best things that happened in college. She has been my mentor and she's just amazing.</li>
+                            
+                            
+                            
+                            <li>Invited as a <a href="https://drive.google.com/drive/u/0/folders/1Hlu3Dw7yUoZKJ_rDWOQMaYmgj58NmmSM" class="external-link"> REVIEWER <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> for the International Conference on Computational Complexity and Intelligent Algorithms (IC3IA2025).</li>
+                            
+                            
+                            
+                            <li>Won Top 20 Best <a href="https://drive.google.com/drive/u/0/folders/1LPf6gjDi4FOy-llIJIPneWLso1DYUpkI" class="external-link"> Capstone team <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
+                            
+                            
+                            
+                            <li>Once the AI side of things were built, I got to work on the Control Plane of the database in order to integrate our project with the db. The coolest part was probably doind the build of the couchbase locally. I was actually building/working on the concepts which I used to be extremely interested in my Database and Big Data classes.</li>
+                            
+                            
+                            
+                            <li>I worked on building a multi-agent system and 1 particular AI Service(can't talk much about it until GA) under  <a href="https://www.linkedin.com/in/santosh-hegde-cb/" class="external-link"> Santosh Hedge<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
+                            
+                            
+                            
+                            <li>Started my journey into corporate on Jan 6th, 2025. I joined the AI Team at <a href="https://www.couchbase.com/" class="external-link"> Couchbase<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, a distributed no-SQL database company built for high performance/heavy workloads including AI workloads.</li>
+                            
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3 class="timeline-year">2024</h3>
+                        <div class="timeline-content">
+                            <ul class="achievement-list">
+                            
+                            
+                            <li>Finally hit the 10 GPA mark in 7th sem (was so close in my 2nd sem too but missed by 0.14).</li>
+                            
+                            
+                            
+                            <li>Got an opportunity to be the Teaching Assistant for Big Data(Dist Sys) for the 3rd year students at PES University. This was a extremely skewed role and making it here was one of the most amazing feeling! (My Unfair advantage - Assignments and projects are extremely tough but I was one of the few in campus to solve everything without ever being plagiarised.)</li>
+                            
+                            
+                            
+                            <li>02.08.2024 - Placed at Couchbase, a distributed no-SQL database company. This was everything I wanted, the only company I targetted to get in for more than a year, to explore systems specially distributed systems and the best thing that could happen was me working in a distributed database company. For any core systems guy, this is the dream place to be and to be very honest I couldn't imagine after I made it to the final round. Hands shivering, couldn't talk. The next morning I woke up not believing myself that I was placed.</li>
+                            
+                            
+                            
+                            <li>Got a <a href="https://drive.google.com/drive/u/0/folders/1z3w2MxLoaX_d91rVqDP0FRcpvucg83hk" class="external-link"> Summer Research Internship <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> at Indian Institute of Science (IISc) under <a href="https://mgmt.iisc.ac.in/shashi-jain/" class="external-link"> Dr. Shashi Jain <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> to work on Project Saathi: Empowering Rural Finance with Equitable Artificial Intelligence (AI), funded by the Gates Foundation. If somebody told the 19 year old me visiting IISC campus for the first time that I'd somebody get the opportunity to do research here, I wouldn't believe them. Dreams do come true!</li>
+                            
+                            
+                            
+                            <li>During summer, worked on a research paper "Identifying Critical Nodes in Complex Networks: A Study of Iterative Algorithms with 6LoWPAN RPL-powered Cooja" taking up a special course on Contiki OS and presented it at ICTCS in December 2024.</li>
+                            
+                            
+                            
+                            <li>Presented my second paper "Advancing Cricket Narratives: AI-Enhanced Advanced Journaling in the IPL Using Language Models" at  IEEE CONECCT, Indian Institute of Science (IISc) Bangalore along with <a href="https://saiyashwanth.tech/" class="external-link"> Sai Yashwanth <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
+                            
+                            
+                            
+                            <li>Presented the paper "Advancing Urban Evacuation Management: A Real-Time, Adaptive Model Leveraging Cloud-Enabled Big Data and IoT Surveillance" at  IEEE CONIT, 2024, along with <a href="https://sarthakskumar.com/" class="external-link"> Sarthak S Kumar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and guided by <a href="https://scholar.google.com/citations?user=7q3inAcAAAAJ&hl=en" class="external-link"> Animesh <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> sir.</li>
+                            
+                            
+                            
+                            <li>CRC Taylor & Francis Book Chapter on <a href="https://books.google.co.za/books?hl=en&lr=&id=C7M1EQAAQBAJ&oi=fnd&pg=PA169&ots=ebikooUVmS&sig=8zlLNO7jjHDZ4h5z2A_4iys2UT4&redir_esc=y#v=onepage&q&f=false" class="external-link"> 2D Nanomaterials for removal of gaseous air contaminants <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> finally came out.</li>
+                            
+                            
+                            
+                            <li>Life came full circle when I got an invited as a mentor for Ingenious, the flagship hackathon of PES university.</li>
+                            
+                            
+                            
+                            <li>Finally went for the long-awaited hostel boys trek to skandagiri, with our hostel being so strict we could manage to rent a few cars at mid-night and drive till the base of skandagiri, and though I was really tired mid-way and felt like giving up on the trek but my friends, they just pushed me to make it to the top and scream at the top of our voices, take shirtless pictures at the hill top.</li>
+                            
+                            
+                            
+                            <li><a href="https://github.com/Sohoxic/EtcdKVStore" class="external-link"> Built a key-value store <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> using etcd for Cloud project.</li>
+                            
+                            
+                            
+                            <li>Built my portfolio website and set up the .com domain for it.</li>
+                            
+                            
+                            
+                            <li>Implemented a <a href="https://github.com/Sohoxic/GFS-git-from-scratch" class="external-link"> Version Control System <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> from scratch with features including repository setup, commits, and pushes to GitHub and had a really cool learning experience about Git internals (blobs, trees, commits etc.). </li>
+                            
+                            
+                            
+                            <li>Assisted Juniors(2nd years) during Computer Networks lab under <a href="https://scholar.google.com/citations?user=7q3inAcAAAAJ&hl=en" class="external-link"> Animesh <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> sir.</li>
+                            
+                            
+                            
+                            <li>Started ideating for our capstone and the idea that resonated with my previous research works in chemistry was tackling with the amount of carbon dioxide content in the atmosphere and reducing the atmospheric pollution which leads towards a more greener and safer environment for people to live and breath in. <a href="https://www.canva.com/design/DAF_BuQnMi0/dcFTAOK9_mSfTI6RtXezMQ/edit?utm_content=DAF_BuQnMi0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="external-link"> Our idea <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> was to use machine learning and blockchain to enhance carbon sequestration and enable transparent carbon credit trading between farmers and industrialists for a sustainable, economically viable future.</li>
+                            
+                            
+                            
+                            <li>Started my year working on a research topic "Advancing Cricket Narratives: AI-Enhanced Advanced Journaling in the IPL Using Language Models" along with <a href="https://saiyashwanth.tech/" class="external-link"> Sai Yashwanth <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a></li>
+                            
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3 class="timeline-year">2023</h3>
+                        <div class="timeline-content">
+                            <ul class="achievement-list">
+                            
+                            
+                            <li>Built my <a href="https://drive.google.com/drive/u/0/folders/1LPf6gjDi4FOy-llIJIPneWLso1DYUpkI" class="external-link"> Capstone team <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> with Aditya Poddar, Ananya Hegde and Shravya Reddy. We were really determined to work under Animesh sir, and it's not easy getting him as the guide for Capstone because almost the entire college would want to work under him. We had proved ourselves to be worth taking the risk and having us under him.</li>
+                            
+                            
+                            
+                            <li>Built and shipped my <a href="https://www.npmjs.com/package/use-formflow" class="external-link"> first npm package(use-formflow) <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> from scratch during my week-ends. It is a custom hook that provides an abstraction for managing form states, validation, and submissions. It simplifies the process of handling form inputs and reduces boilerplate for developers.</li>
+                            
+                            
+                            
+                            <li>Was really inspired by Harkirat, joined his <a href="https://100xdevs.com/" class="external-link"> cohort <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and that's one of the best investments I've done till date. Learnt everything about the web, how the internet works, docker, deploying applications etc. Learnt about Design Patterns and implemented that while I built <a href="https://github.com/Sohoxic/One-Stop-Shop" class="external-link"> One-Stop-Shop <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, a full-stack application .</li>
+                            
+                            
+                            
+                            <li>Joined the Operations team as the Lead for Maaya, our cultural fest but soon dropped out due to clash of timings and events with Shunya and my integrity did not allow me to just hold a position without working hard for it, I still kept supporting the team from the backend.</li>
+                            
+                            
+                            
+                            <li>Got started with solving <a href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/" class="external-link"> Striver's A2Z sheet <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> for DSA.</li>
+                            
+                            
+                            
+                            <li>Our presentation left such an impact that the college's principal requested me to give a talk to the 3rd and 4th-year students. I was more than happy to share my insights on opensource, and in-depth about version control systems, and also provide guidance on building a strong LinkedIn profile and networking with professionals worldwide.</li>
+                            
+                            
+                            
+                            <li>Presented my paper entitled <a href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/" class="external-link"> Enhancing Electromagnetic Compatibility with Polyaniline using MnO2 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> National Conference On Recent Trends in Smart Materials (NCRTSM) at King's College, Tamil Nadu.  What made this experience even more special is that I was the only undergraduate student presenting amongst a group of accomplished PhD students.</li>
+                            
+                            
+                            
+                            <li>Won a fun pitch-your-idea challenge at an <a href="https://www.linkedin.com/posts/sarkar-soham_talktomeabout-speednetworking-group-activity-7103623782728105985-9INM?utm_source=share&utm_medium=member_desktop&rcm=ACoAADecRt4BzWqZFw-pNrYYgZ7VoI0NBujCCH8" class="external-link"> an invite-only meetup <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> organized by Bluelearn, an edtech and social learning startup valued at ₹86.4 Cr. I got to meet a lot of high-agency people, including Bluelearn’s founders, Harish and Shreyans!.</li>
+                            
+                            
+                            
+                            <li><a href="https://drive.google.com/drive/u/0/folders/1J1Ya5J6SM9qSk6TajV9Q5vN9uygGHemb" class="external-link"> Visited the data center <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> at NetApp's Hoody campus in Bangalore. When I was learning about databases, I was really fascinated to once visit a data centers. Uff this was such an experience.</li>
+                            
+                            
+                            
+                            <li>Got a chance to attend <a href="https://drive.google.com/drive/u/0/folders/11qupJNo0LyT4P7KVYRzWPL2sRNvh8OZf" class="external-link"> the MITC Engineering Confluence 2023 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, where I had the privilege of visiting Moog Aircraft, a globally renowned company specializing in precision control components and systems.</li>
+                            
+                            
+                            
+                            <li>Got appointed as the Head of Shunya ECC based on my leadership skills, which include taking ownership of work, giving people due diligence, being reliable and also based on my performance in the team(from being an unknown club to being one of the most popular clubs on EC campus, what started from a 5-7 member team had grown to over a hundred member team).</li>
+                            
+                            
+                            
+                            <li>Got really interested in Big Data and soon started working on the paper "Advancing Urban Evacuation Management: A Real-Time, Adaptive Model Leveraging Cloud-Enabled Big Data and IoT Surveillance" along with <a href="https://sarthakskumar.com/" class="external-link"> Sarthak S Kumar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> under <a href="https://scholar.google.com/citations?user=7q3inAcAAAAJ&hl=en" class="external-link"> Animesh <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> sir.</li>
+                            
+                            
+                            
+                            <li>Since I was into research, I did my Summer Research Internship at <a href="https://www.linkedin.com/company/starc-pesu/posts/?feedView=all" class="external-link"> Sports Technology And Analytics Research Centre(STARC) <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, Bengaluru and worked on building Machine Learning models to analyse characteristics of ice hockey players and teams through the use of statistics and machine learning tools to understand the effects on their performance. I was exploring the field of Machine Learning too, trying my hands on anything everything and seeing that interests me the most.</li>
+                            
+                            
+                            
+                            <li>Secured <a href="https://www.linkedin.com/posts/sarkar-soham_greetings-everyone-i-am-thrilled-to-share-activity-7058738681615958016-MlEX?utm_source=share&utm_medium=member_desktop&rcm=ACoAADecRt4BzWqZFw-pNrYYgZ7VoI0NBujCCH8" class="external-link"> the 3rd position <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> in the flagship hackathon, Ingenious, organized by PES University, EC Campus. Finally getting the long awaited win. In 2021, we were in top 10 and won the most unique project award in our first year but could not make it to the top 3  and was really disheartened but we kept working and chasing our goal and here we were in 2023, winning the podium. I was really proud of myself.</li>
+                            
+                            
+                            
+                            <li>I again got really interested in Web Dev and soon started with  <a href="https://www.theodinproject.com/" class="external-link"> the Odin Project <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. </li>
+                            
+                            
+                            
+                            <li>Almost after an year's effort, my first book chapter <a href="https://books.google.co.za/books?hl=en&lr=&id=C7M1EQAAQBAJ&oi=fnd&pg=PA169&ots=ebikooUVmS&sig=8zlLNO7jjHDZ4h5z2A_4iys2UT4&redir_esc=y#v=onepage&q&f=false" class="external-link"> 2D Nanomaterials for removal of gaseous air contaminants <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> got accepted in the reputed TAYLOR AND FRANCIS.</li>
+                            
+                            
+                            
+                            <li>Worked on our second startup, <a href="https://iotforhire.vercel.app/" class="external-link"> IoTforHire <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>, where I led the complete tech execution—from choosing the right architecture and building the core system as the CTO. IoTforHire provided reliable IoT components to college students for rent with the convenience of on campus one-day delivery. We serviced 58 orders in just the first 10 days.</li>
+                            
+                            
+                            
+                            <li>Interviewed and got selected as Head of Sponsorship for IEEE RAS(Robotics and Automation Society)</li>
+                            
+                            
+                            
+                            <li>Organised my first event from Shunya as the Logistics Head - <a href="https://drive.google.com/drive/folders/1rkOnMjpgRDvw_yGfsZKQ9UEcBpctV7vX" class="external-link"> Qubitrix <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>(10-hour ideathon), the flagship event.</li>
+                            
+                            
+                            
+                            <li>Got promoted as the Head of Logistics in Shunya. I worked with the club heads to prepare the budget and ensure all logistical arrangements for the event.</li>
+                            
+                            
+                            
+                            <li>Soon after I joined Codechef, I became part of the organizing team for a 2-hour coding challenge, where I helped plan and ensure smooth execution for all participants.</li>
+                            
+                            
+                            
+                            <li>Joined Codechef PESU ECC as the Technical Core Team lead to provide guidance and support to a team of tech enthusiasts in building and maintaining a website for a club.</li>
+                            
+                            
+                            
+                            <li>Organized an <a href="https://drive.google.com/drive/folders/1ih3GbMe3kx5goDi80I3AYcxs7zpYPeBy" class="external-link"> Outreach <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> program to visit a government-aided school Adopted under PES University in Bangalore to teach mathematics in a fun and interactive way. This was one of the best time I had during college.</li>
+                            
+                            
+                            
+                            <li>I was always interested in OS and the moment I learnt about kernels, I came back home from college and built <a href="https://github.com/Sohoxic/LinEx" class="external-link"> A simple Linux Kernel Module <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> that lists all the currently running processes in the system and their corresponding states (2024: I am glad to know a lot of peers and later juniors found this repository helpful).</li>
+                            
+                            
+                            
+                            <li>Learnt about Computer Networks and implemented from scratch <a href="https://github.com/Sohoxic/Connectify" class="external-link"> A File Transfer Protocol (FTP) system <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> for file transfer between multiple clients and the server over a network.</li>
+                            
+                            
+                            
+                            <li>Started <a href="hhttps://www.linkedin.com/in/sarkar-soham/details/experience/1635530246610/single-media-viewer/?profileId=ACoAADecRt4BzWqZFw-pNrYYgZ7VoI0NBujCCH8" class="external-link"> internship in Marketing <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>  at My Captain, NSRCEL- IIM Bangalore Incubated Company</li>
+                            
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3 class="timeline-year">2022</h3>
+                        <div class="timeline-content">
+                            <ul class="achievement-list">
+                            
+                            
+                            <li>I was introduced to Automata Formal Languages and Logic, learnt all about NFA, DFA, Regular grammer, Context Free grammer, and most importantly about Turing Machines and it excited me like nothing else before. This ignited in me the passion and love for systems. Scored 100/100 scaled down to 50/50 in mid terms and later got a perfect 10 pointer in AFLL.</li>
+                            
+                            
+                            
+                            <li>I started diving deep into JS frameworks - REACT, NODE, EXPRESS and built my own video streaming platform- <a href="https://playris.netlify.app/" class="external-link"> Playris <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
+                            
+                            
+                            
+                            <li>Started learning everything about <a href="https://www.geeksforgeeks.org/courses/cpp-programming-basic-to-advanced" class="external-link"> Data Structures <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>(not problem solving but knowing core data structures, any every data structure that was there) in cpp in details.</li>
+                            
+                            
+                            
+                            <li>Tried my hands in competitive programming inspired by <a href="https://www.linkedin.com/in/yuvraj-sakshith-5005a421b/?originalSubdomain=in" class="external-link"> Yuvraj <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. It really gave the adrenaline rush but didn't continue for long because I was more interested in building something.</li>
+                            
+                            
+                            
+                            <li> Started learning <a href="hhttps://github.com/Sohoxic/DSA-in-C" class="external-link"> Data Structures in C, <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>  although people hated C but I enjoyed writing code in C more than writing in python because Linux Kernel was written in C and I used to fancy Linux very much(I still do) plus the level of memory manipulation you can do in C, you can't do it to that extent in any other high level languages like python.</li>
+                            
+                            
+                            
+                            <li>Volunteered as mentor for my first event in Shunya, Anveshana, an ideathon where I mentored government school students.</li>
+                            
+                            
+                            
+                            <li>I really loved Mathematics and I joined "Shunya", a mathematics and research oriented club.</li>
+                            
+                            
+                            
+                            <li>Made my first proper contribution to <a href="https://hacktoberfest.com/" class="external-link"> Hacktoberfest <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. I contributed to projects in IOT and Web Dev.</li>
+                            
+                            
+                            
+                            <li>Lost all my contributions in github when I tried adding a new email and removing my primary email(big blunder). Soon created my new account with my personal email id.</li>
+                            
+                            
+                            
+                            <li>I joined my first ever club "HackerSpace", a student-run developer community with an Open-Source wing at the start of my 3rd semester. <a href="https://" class="external-link"> Interesting Story on how I joined <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>.</li>
+                            
+                            
+                            
+                            <li>I visited IISC Bangalore for a <a href="https://drive.google.com/drive/folders/1rv5KzT-Jlc0Z-7G1itMC_mObkf_yv0NL" class="external-link"> Machine Learning workshop <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and it was a dream come true moment. Also on the very same day, I was asked to attend my Junior batch's orientation where I would be honoured by our Chancellor, Dr M.R Doreswamy on being in the <a href="https://INSERTTHEAWARD" class="external-link"> Top 3 Student <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> academically but unfortunately I had to miss this. I sometimes regret but back then being in IISC was the dream.</li>
+                            
+                            
+                            
+                            <li>I scored a SGPA of 9.86 in Sem 2 which went in a breeze. The most fun part about sem 2 was learning C.</li>
+                            
+                            
+                            
+                            <li>I started writing my first ever paper in Chemistry "Radiation Pollution and it's impacts on living creatures in and around Bangalore" and much later presented it(<a href="https://drive.google.com/drive/folders/1h_C3xpq5LB-G_FRKeCiBYhGBhRIN50OO" class="external-link"> Link <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>).</li>
+                            
+                            
+                            
+                            <li>Learnt C in depth from<a href="https://ieeexplore.ieee.org/author/37089811856" class="external-link"> Sreenath sir <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> and he was an wonderful professor. I focused much on writing code and understanding the jargons.</li>
+                            
+                            
+                            
+                            <li>Sem 1 ended on a good note. Scored a 9.41 GPA with Grade 10 in Engineering Physics and Engineering Electrical.</li>
+                            
+                            
+                            
+                            <li>Spent time learning basic HTML, CSS. I really loved learning C, picked up the "The C Programming Language" by Dennis Ritchie, the creator of C language. C Notes(will insert my notes here.)</li>
+                            
+                            
+                            
+                            <li>I started learning more about git, github (will insert my notes here).</li>
+                            
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3 class="timeline-year">2021</h3>
+                        <div class="timeline-content">
+                            <ul class="achievement-list">
+                            
+                            
+                            <li>Participated in my second hackathon Ingenious with participants across South India and made it to top 10(the youngest team to make it) and got mentioned as the "Most Unique Project" (<a href="https://drive.google.com/drive/u/0/folders/1qCDTuwdt3MP__d0Nt4OsVNQpZnH-AWoV" class="external-link"> Check out! <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>). This was a win for us and the mentors really boosted us to work on our idea.</li>
+                            
+                            
+                            
+                            <li>Participated in my first ever hackathon. Unfortunately did not make it to the podiums (<a href="https://drive.google.com/drive/u/0/folders/1_qrhJKc2HMUAmH1PdU0KIoYj60bsT0_C" class="external-link"> Check out! <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>).</li>
+                            
+                            
+                            
+                            <li>Got introduced to Open Source during <a href="https://hacktoberfest.com/" class="external-link"> Hacktoberfest <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> by none other than <a href="https://rowjee.com" class="external-link"> Anirudh Rowjee <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>. Life changed here onwards!</li>
+                            
+                            
+                            
+                            <li>Started exploring the field of research inspired by Mohana Lakshmi ma'am, read literature in quantum physics but couldn't continue unfortunately.</li>
+                            
+                            
+                            
+                            <li>Started learning python(built a basic phonebook), got really interested in Quantum physics (Thanks to <a href="https://staff.pes.edu/nm1396/" class="external-link">Dr. Mohana Lakshmi<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>).</li>
+                            
+                            
+                            
+                            <li>Learnt about different operating system and I was fascinated by Linux so I installed Linux(PopOS) into my system as soon as I bought my new laptop. It was so much fun using the terminal to do most of the stuff.</li>
+                            
+                            
+                            
+                            <li><a href="/journey.html" class="external-link">Started my Bachelor's in Computer Science and moved to Bengaluru <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a> (the best decision of my life, thanks to BABA.)</li>
+                            
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3 class="timeline-year">2020</h3>
+                        <div class="timeline-content">
+                            <ul class="achievement-list">
+                            
+                            
+                            <li>Class 12 (Higher Secondary) - Science stream (Physics, Chemistry, Mathematics) - 94%</li>
+                            
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3 class="timeline-year">2018</h3>
+                        <div class="timeline-content">
+                            <ul class="achievement-list">
+                            
+                            
+                            <li>Class 10 (Matriculation) - Core subjects including Science and Mathematics - 95%</li>
+                            
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </main>
+
+            <!-- Call-to-Action Section -->
+            <section class="cta-section">
+                <h3 class="cta-title">Ready to dive deeper?</h3>
+                <p class="cta-subtitle">Explore my thoughts on AI, systems, research, and everything in between.</p>
+                <a href="/thesohoxictales/" class="cta-button">
+                    Read My Blog
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <p>&copy; 2025 <a href="https://sarkarsoham.com">Soham Sarkar</a> | Built with ❤️ by <a href="https://github.com/Sohoxic/toxic">toxic!</a> 🧪</p>
+                    <div class="footer-socials">
+                        <a href="https://github.com/sohoxic" target="_blank" title="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/sohoxic_" target="_blank" title="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sarkar-soham/" target="_blank" title="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
     <script>
         // Terminal functionality
         const terminalInput = document.getElementById('terminal-input');
         const terminalHistory = document.getElementById('terminal-history');
         const terminal = document.getElementById('terminal');
         let currentDirectory = '~';
-        
+
         // Focus terminal input when clicking anywhere on terminal
         terminal.addEventListener('click', () => {
             terminalInput.focus();
         });
-        
+
         // Auto-focus on page load
         document.addEventListener('DOMContentLoaded', () => {
             terminalInput.focus();
         });
-        
+
         // Handle terminal commands
         terminalInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -1018,13 +1077,13 @@
                 terminalInput.value = '';
             }
         });
-        
+
         function handleCommand(command) {
             const lowerCommand = command.toLowerCase();
-            
+
             // Add command to history
             addToHistory('command', command);
-            
+
             switch (lowerCommand) {
                 case 'cd blog':
                 case 'cd thesohoxictales':
@@ -1033,7 +1092,7 @@
                         window.location.href = '/thesohoxictales/';
                     }, 1000);
                     break;
-                    
+
                 case 'cd proof-of-work':
                 case 'cd proof-of-work/':
                     addToHistory('output', 'Navigating to proof-of-work section...');
@@ -1041,42 +1100,42 @@
                         document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
                     }, 1000);
                     break;
-                    
+
                 case 'ls':
                     addToHistory('output', 'blog/  proof-of-work/  contact.txt');
                     break;
-                    
+
                 case 'pwd':
                     addToHistory('output', `/home/soham${currentDirectory === '~' ? '' : currentDirectory}`);
                     break;
-                    
+
                 case 'whoami':
                     addToHistory('output', 'soham - CS graduate passionate about AI, systems programming, and building things that matter.');
                     addToHistory('output', 'Currently working at <span class="couchbase-highlight">Couchbase<span class="couchbase-tooltip">COUCH = Clusters Of Unreliable Commodity Hardware</span></span>, a distributed database company.');
                     break;
-                    
+
                 case 'help':
                     addToHistory('output', 'Available commands: whoami, ls, pwd, cd blog, cd proof-of-work, help, clear');
                     break;
-                    
+
                 case 'clear':
                     terminalHistory.innerHTML = '';
                     return;
-                    
+
                 case '':
                     // Empty command, just show new prompt
                     break;
-                    
+
                 default:
                     addToHistory('error', `Command not found: ${command}. Type 'help' for available commands.`);
                     break;
             }
         }
-        
+
         function addToHistory(type, content) {
             const line = document.createElement('div');
             line.className = 'terminal-line';
-            
+
             if (type === 'command') {
                 line.innerHTML = `
                     <span class="terminal-prompt">
@@ -1089,13 +1148,13 @@
             } else {
                 line.innerHTML = `<span class="terminal-output">${content}</span>`;
             }
-            
+
             terminalHistory.appendChild(line);
-            
+
             // Scroll to bottom
             terminal.scrollTop = terminal.scrollHeight;
         }
-        
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1108,4 +1167,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
