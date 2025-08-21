@@ -5,7 +5,7 @@ function App() {
   // Redirect component for the root path
   const RedirectToHome = () => {
     useEffect(() => {
-      window.location.href = '/home';
+      window.location.href = '/home' + window.location.hash;
     }, []);
     
     return (
@@ -47,7 +47,7 @@ function App() {
     useEffect(() => {
       // In development, redirect to starthere.html
       // In production, Vercel handles this rewrite
-      window.location.href = '/starthere.html';
+      window.location.href = '/starthere.html' + window.location.hash;
     }, []);
     
     return (
@@ -87,7 +87,7 @@ function App() {
   // Redirect component for the blog path
   const RedirectToBlog = () => {
     useEffect(() => {
-      window.location.href = '/thesohoxictales.html';
+      window.location.href = '/thesohoxictales.html' + window.location.hash;
     }, []);
     
     return (
